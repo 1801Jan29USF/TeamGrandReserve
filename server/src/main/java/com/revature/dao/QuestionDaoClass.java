@@ -3,6 +3,8 @@ package com.revature.dao;
 import com.revature.entities.dbobjects.Question;
 import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
+import org.hibernate.NonUniqueObjectException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -38,7 +40,7 @@ public class QuestionDaoClass implements QuestionDao{
         se.close();
         return q;
     }
-    public Question loadById(int qid){
+    public Question loadById(int qid) throws ObjectNotFoundException {
         Session se = su.getSession();
         Question q = (Question) se.load(Question.class, qid);
         log.info(q.getBid());
@@ -47,7 +49,7 @@ public class QuestionDaoClass implements QuestionDao{
     }
 
     @Override
-    public void update(Question q) {
+    public void update(Question q) throws NonUniqueObjectException {
         Session se = su.getSession();
         se.update(q);
         se.close();

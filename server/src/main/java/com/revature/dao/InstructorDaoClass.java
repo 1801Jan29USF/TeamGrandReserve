@@ -3,6 +3,8 @@ package com.revature.dao;
 import com.revature.entities.dbobjects.Instructor;
 import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
+import org.hibernate.NonUniqueObjectException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -43,7 +45,7 @@ public class InstructorDaoClass implements InstructorDao {
     }
 
     @Override
-    public Instructor loadByUsername(String username) {
+    public Instructor loadByUsername(String username) throws ObjectNotFoundException {
         Session se = su.getSession();
         Instructor b = (Instructor) se.load(Instructor.class, username);
         se.close();
@@ -51,7 +53,7 @@ public class InstructorDaoClass implements InstructorDao {
     }
 
     @Override
-    public void update(Instructor i) {
+    public void update(Instructor i) throws NonUniqueObjectException {
         Session se = su.getSession();
         se.update(i);
         se.close();

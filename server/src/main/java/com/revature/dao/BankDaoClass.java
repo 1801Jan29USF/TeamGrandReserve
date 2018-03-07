@@ -3,6 +3,8 @@ package com.revature.dao;
 import com.revature.entities.dbobjects.Bank;
 import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
+import org.hibernate.NonUniqueObjectException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -43,7 +45,7 @@ public class BankDaoClass implements BankDao{
     }
 
     @Override
-    public Bank loadById(int bid) {
+    public Bank loadById(int bid) throws ObjectNotFoundException {
         Session se = su.getSession();
         Bank b = (Bank) se.load(Bank.class, bid);
         se.close();
@@ -51,14 +53,14 @@ public class BankDaoClass implements BankDao{
     }
 
     @Override
-    public void update(Bank b) {
+    public void update(Bank b) throws NonUniqueObjectException {
         Session se = su.getSession();
         se.update(b);
         se.close();
     }
 
     @Override
-    public void merge(Bank b) {
+    public void merge(Bank b){
         Session se = su.getSession();
         se.merge(b);
         se.close();
