@@ -16,6 +16,14 @@ public class Instructor {
     @Column(name = "PASSW")
     private String passw;
 
+    public Instructor(String uname, String passw) {
+        this.uname = uname;
+        this.passw = passw;
+    }
+
+    public Instructor() {
+    }
+
     public String getUname() {
         return uname;
     }

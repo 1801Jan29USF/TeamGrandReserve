@@ -1,6 +1,6 @@
 package com.revature.dao;
 
-import com.revature.entities.dbobjects.Question;
+import com.revature.entities.dbobjects.Bank;
 import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -9,40 +9,44 @@ import org.hibernate.Transaction;
 /**
  * Functionality:
  */
-public class QuestionDaoClass implements QuestionDao{
+public class BankDaoClass implements BankDao{
     private Logger log = Logger.getRootLogger();
     private SessionUtil su = SessionUtil.getSessionUtil();
+    @Override
+    public Bank save(Bank b) {
+        Session se = su.getSession();
+        Transaction tx = se.beginTransaction();
+        int bid = (int)se.save(b);
+        log.info(bid);
+        tx.commit();
+        se.close();
+        return b;
+    }
 
-    public Question save(Question q){
+    @Override
+    public Bank persist(Bank b) {
         Session se = su.getSession();
         Transaction tx = se.beginTransaction();
-        int id = (int) se.save(q);
-        log.info(id);
+        se.persist(b);
+        log.info(b.getBid());
         tx.commit();
         se.close();
-        return q;
+        return b;
     }
-    public Question persist(Question q){
+
+    @Override
+    public Bank getById(int bid) {
         Session se = su.getSession();
-        Transaction tx = se.beginTransaction();
-        se.persist(q);
-        log.info(q.getQid());
-        //q.setCorrect(2);
-        tx.commit();
+        Bank b = (Bank) se.get(Bank.class, bid);
         se.close();
-        return q;
+        return b;
     }
-    public Question getById(int qid){
+
+    @Override
+    public Bank loadById(int bid) {
         Session se = su.getSession();
-        Question q = (Question) se.get(Question.class, qid);
+        Bank b = (Bank) se.load(Bank.class, bid);
         se.close();
-        return q;
-    }
-    public Question loadById(int qid){
-        Session se = su.getSession();
-        Question q = (Question) se.load(Question.class, qid);
-        log.info(q.getBid());
-        se.close();
-        return q;
+        return b;
     }
 }
