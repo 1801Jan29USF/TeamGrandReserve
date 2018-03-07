@@ -49,4 +49,18 @@ public class BankDaoClass implements BankDao{
         se.close();
         return b;
     }
+
+    @Override
+    public void update(Bank b) {
+        Session se = su.getSession();
+        se.update(b);
+        se.close();
+    }
+
+    @Override
+    public void merge(Bank b) {
+        Session se = su.getSession();
+        se.merge(b);
+        se.close();
+    }
 }

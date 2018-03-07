@@ -12,4 +12,7 @@ public interface InstructorDao {
     //R
     Instructor getByUsername(String username);
     Instructor loadByUsername(String username);
+    //U
+    void update(Instructor i);
+    void merge(Instructor i);
 }

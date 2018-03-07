@@ -12,4 +12,7 @@ public interface BankDao {
     //R
     Bank getById(int bid);
     Bank loadById(int bid);
+    //U
+    void update(Bank b);
+    void merge(Bank b);
 }

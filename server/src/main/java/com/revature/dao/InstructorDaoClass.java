@@ -49,4 +49,18 @@ public class InstructorDaoClass implements InstructorDao {
         se.close();
         return b;
     }
+
+    @Override
+    public void update(Instructor i) {
+        Session se = su.getSession();
+        se.update(i);
+        se.close();
+    }
+
+    @Override
+    public void merge(Instructor i) {
+        Session se = su.getSession();
+        se.merge(i);
+        se.close();
+    }
 }

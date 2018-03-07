@@ -45,4 +45,18 @@ public class QuestionDaoClass implements QuestionDao{
         se.close();
         return q;
     }
+
+    @Override
+    public void update(Question q) {
+        Session se = su.getSession();
+        se.update(q);
+        se.close();
+    }
+
+    @Override
+    public void merge(Question q) {
+        Session se = su.getSession();
+        se.merge(q);
+        se.close();
+    }
 }
