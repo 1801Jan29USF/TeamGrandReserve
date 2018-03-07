@@ -14,8 +14,8 @@
         <property name="hibernate.format_sql">true</property>-->
 
         <property name="hibernate.connection.pool_size">5</property>
-        <mapping class="main.com.revature.entities.dbobjects.Instructor"/>
-        <mapping class="main.com.revature.entities.dbobjects.Question"/>
-        <mapping class="main.com.revature.entities.dbobjects.Bank"/>
+        <mapping class="com.revature.entities.dbobjects.Instructor"/>
+        <mapping class="com.revature.entities.dbobjects.Question"/>
+        <mapping class="com.revature.entities.dbobjects.Bank"/>
     </session-factory>
 </hibernate-configuration>

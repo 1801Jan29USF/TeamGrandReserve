@@ -1,7 +1,7 @@
-package main.com.revature.dao;
+package com.revature.dao;
 
-import main.com.revature.entities.dbobjects.Question;
-import main.com.revature.util.SessionUtil;
+import com.revature.entities.dbobjects.Question;
+import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

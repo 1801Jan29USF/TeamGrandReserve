@@ -1,4 +1,4 @@
-package main.com.revature.entities;
+package com.revature.entities;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,11 @@
-package main.com.revature.launcher;
+package com.revature.launcher;
 
 
-import main.com.revature.dao.QuestionDao;
-import main.com.revature.dao.QuestionDaoClass;
-import main.com.revature.entities.dbobjects.Question;
-import main.com.revature.entities.dbobjects.Bank;
-import main.com.revature.util.SessionUtil;
+import com.revature.dao.QuestionDao;
+import com.revature.dao.QuestionDaoClass;
+import com.revature.entities.dbobjects.Question;
+import com.revature.entities.dbobjects.Bank;
+import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
 
 /**

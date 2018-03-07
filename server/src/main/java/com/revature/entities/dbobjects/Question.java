@@ -1,4 +1,4 @@
-package main.com.revature.entities.dbobjects;
+package com.revature.entities.dbobjects;
 
 import javax.persistence.*;
 

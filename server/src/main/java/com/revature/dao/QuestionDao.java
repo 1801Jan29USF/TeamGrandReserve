@@ -1,6 +1,6 @@
-package main.com.revature.dao;
+package com.revature.dao;
 
-import main.com.revature.entities.dbobjects.Question;
+import com.revature.entities.dbobjects.Question;
 
 /**
  * Functionality:

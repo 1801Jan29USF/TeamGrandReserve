@@ -1,6 +1,6 @@
-package main.com.revature.entities;
+package com.revature.entities;
 
-import main.com.revature.entities.dbobjects.Instructor;
+import com.revature.entities.dbobjects.Instructor;
 
 import java.util.ArrayList;
 
