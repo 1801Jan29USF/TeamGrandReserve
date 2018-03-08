@@ -1,16 +1,19 @@
 package com.revature.dao;
 
-import com.revature.entities.dbobjects.Question;
-import com.revature.util.SessionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.NonUniqueObjectException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+
+import com.revature.entities.dbobjects.Question;
+import com.revature.util.SessionUtil;
 
 /**
  * Functionality:
  */
+@Repository
 public class QuestionDaoClass implements QuestionDao{
     private Logger log = Logger.getRootLogger();
     private SessionUtil su = SessionUtil.getSessionUtil();
@@ -51,14 +54,18 @@ public class QuestionDaoClass implements QuestionDao{
     @Override
     public void update(Question q) throws NonUniqueObjectException {
         Session se = su.getSession();
+        Transaction tx = se.beginTransaction();
         se.update(q);
+        tx.commit();
         se.close();
     }
 
     @Override
     public void merge(Question q) {
         Session se = su.getSession();
+        Transaction tx = se.beginTransaction();
         se.merge(q);
+        tx.commit();
         se.close();
     }
 }

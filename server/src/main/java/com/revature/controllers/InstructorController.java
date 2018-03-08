@@ -5,13 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.services.GenericService;
+import com.revature.services.InstructorServiceInterface;
+
 @Controller
 @RestController
 @RequestMapping("instructor")
 public class InstructorController extends EntityController{
 	
 	@Autowired
-	private myService myservice; // add the appropriate service
-	
-	sp = myservice;
+	public InstructorController( InstructorServiceInterface myService) {	
+		this.sp = (GenericService) myService;
+	}
 }

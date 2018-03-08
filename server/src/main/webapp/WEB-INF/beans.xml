@@ -11,5 +11,5 @@
     <!-- Enabling Annotation configuration of Spring MVC -->
     <mvc:annotation-driven />
     
-    
+    <mvc:resources location="/static" mapping="/**"></mvc:resources>
 </beans>
