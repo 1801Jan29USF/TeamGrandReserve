@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { UIRouterModule } from '@uirouter/angular';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -10,8 +10,11 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 
 import { appRoutes } from './routes';
-import { MenuComponent } from './components/menu/menu.component';
+
+import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu.component';
+import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { PregameComponent } from './components/pregame/pregame.component';
+
 
 
 @NgModule({
@@ -21,16 +24,21 @@ import { PregameComponent } from './components/pregame/pregame.component';
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     FormsModule,
-
   ],
   declarations: [
     AppComponent,
     NavComponent,
     MenuComponent,
+    NgbdModalContentComponent,
+    StartScreenComponent,
     PregameComponent
+
   ],
   providers: [
 
+  ],
+  entryComponents: [
+    NgbdModalContentComponent
   ],
   bootstrap: [AppComponent]
 })
