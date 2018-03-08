@@ -1,0 +1,72 @@
+.container{
+  margin-top: 6%;
+  width:40vw;
+
+  order:1;
+  margin-bottom: 6%;
+  text-align: center;
+  alignment: center;
+
+}
+
+.table{
+  background-color: aliceblue;
+  text-align: center;
+  font-size: 14pt;
+}
+.team-leader{
+  font-size: 20pt;
+  font-family: bold, sans-serif;
+}
+th {
+  text-align: center;
+}
+
+#code{
+  font-size: 15vw;
+}
+
+#code_label{
+  font-size: 32pt;
+}
+
+.btn-primary{
+  font-size: 20pt;
+  background-color: white;
+  color: blue;
+}
+
+.btn-primary:hover{
+  background-color: blue;
+  color: white;
+}
+
+.sidebar{
+  padding: .5em;
+  text-align: center;
+  background-color:red;
+  right:1.5vw;
+  position: relative;
+  width: 26vw;
+  order:0;
+  -webkit-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+}
+.sidebar2{
+  padding: .5em;
+  text-align: center;
+  background-color:blue;
+  left:1.5vw;
+  position: relative;
+  width: 26vw;
+  order:2;
+  -webkit-box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.container-fluid{
+  display:flex;
+  height:100vh;
+}

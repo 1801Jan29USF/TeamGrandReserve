@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <aside class="sidebar">
+    <h1>Red</h1>
+    <table class="table table-bordered table-hover team-leader" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Team Leader</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of redTeam">
+          <td *ngIf="player.leader">{{player.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Team Members</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of redTeam">
+        <td (click)="setLeader(player)" *ngIf="!player.leader">{{player.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </aside>
+  <aside class="sidebar2">
+    <h1>Blue</h1>
+    <table class="table table-bordered table-hover team-leader" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Team Leader</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of blueTeam">
+        <td *ngIf="player.leader">{{player.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Team Members</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of blueTeam">
+        <td (click)="setLeader(player)" *ngIf="!player.leader">{{player.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </aside>
+  <div class="container">
+    <label id="code_label">Code</label>
+    <br>
+    <label id="code">3N8H</label>
+    <br>
+    <button class="btn btn-primary">Start Game!</button>
+  </div>
+</div>
