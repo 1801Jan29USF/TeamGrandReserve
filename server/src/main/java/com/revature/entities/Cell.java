@@ -3,6 +3,7 @@ package com.revature.entities;
 import com.revature.entities.dbobjects.Question;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Functionality:
@@ -44,4 +45,39 @@ public class Cell {
     public void setQuestionSet(ArrayList<Question> questionSet) {
         this.questionSet = questionSet;
     }
+
+	public Cell() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Cell(int cid) {
+		super();
+		this.cid = cid;
+		Random random = new Random();
+		this.value = (random.nextInt(9) + 1);
+		switch(cid) {
+		case 1:
+		case 2:
+		case 6:
+			this.color = "red";
+			break;
+		case 14:
+		case 19:
+		case 20:
+			this.color = "blue";
+			break;
+		default:
+			this.color = "white";
+			break;			
+		}
+		this.questionSet = getQuestions(this.value);
+	}
+	
+	private ArrayList<Question> getQuestions(int value){
+		
+		
+		return null;
+		
+	}
 }

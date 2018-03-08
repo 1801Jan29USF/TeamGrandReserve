@@ -68,6 +68,9 @@ public class Game {
 		this.code = generateCode();
 		this.teams.add(new Team());
 		this.teams.add(new Team());
+		for(int i=0; i<16; i++) {
+			this.map.add(new Cell(i));
+		}
 	}
 
 	@Override
