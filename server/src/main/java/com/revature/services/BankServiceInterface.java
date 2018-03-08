@@ -1,5 +1,5 @@
 package com.revature.services;
 
-public interface BankServiceInterface {
+public interface BankServiceInterface extends GenericService{
 
 }

@@ -15,6 +15,6 @@ public class QuestionController extends EntityController{
 	
 	@Autowired
 	public QuestionController( QuestionServiceInterface myService) {	
-		this.sp = (GenericService) myService;
+		this.sp = myService;
 	}
 }

@@ -22,4 +22,14 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
+
+	public Player() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Player(String name) {
+		super();
+		this.name = name;
+	}
 }
