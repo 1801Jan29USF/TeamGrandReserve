@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 
 import { appRoutes } from './routes';
 import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu.component';
+import { StartScreenComponent } from './components/start-screen/start-screen.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu
     AppComponent,
     NavComponent,
     MenuComponent,
-    NgbdModalContentComponent
+    NgbdModalContentComponent,
+    StartScreenComponent
   ],
   providers: [
 
