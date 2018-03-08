@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 
 import { appRoutes } from './routes';
 import { MenuComponent } from './components/menu/menu.component';
+import { PregameComponent } from './components/pregame/pregame.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MenuComponent } from './components/menu/menu.component';
   declarations: [
     AppComponent,
     NavComponent,
-    MenuComponent
+    MenuComponent,
+    PregameComponent
   ],
   providers: [
 
