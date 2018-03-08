@@ -7,10 +7,12 @@ import org.hibernate.NonUniqueObjectException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 /**
  * Functionality:
  */
+@Repository
 public class BankDaoClass implements BankDao{
     private Logger log = Logger.getRootLogger();
     private SessionUtil su = SessionUtil.getSessionUtil();
@@ -55,14 +57,18 @@ public class BankDaoClass implements BankDao{
     @Override
     public void update(Bank b) throws NonUniqueObjectException {
         Session se = su.getSession();
+        Transaction tx = se.beginTransaction();
         se.update(b);
+        tx.commit();
         se.close();
     }
 
     @Override
     public void merge(Bank b){
         Session se = su.getSession();
+        Transaction tx = se.beginTransaction();
         se.merge(b);
+        tx.commit();
         se.close();
     }
 }

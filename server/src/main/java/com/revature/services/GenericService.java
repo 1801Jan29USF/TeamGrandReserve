@@ -5,7 +5,8 @@ public interface GenericService {
 	
 	public Object getResponse(String id);
 	
-	public boolean postCreate(Object toCreate);
+	public boolean postCreate(String toCreate);
 	
-	public boolean postUpdate(Object toUpdate);
+	public boolean postUpdate(String toUpdate);
+
 }
