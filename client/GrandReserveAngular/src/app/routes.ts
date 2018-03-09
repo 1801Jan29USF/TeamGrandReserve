@@ -3,7 +3,7 @@ import { MenuComponent } from './components/menu/menu.component';
 
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 
-import {PregameComponent} from "./components/pregame/pregame.component";
+import { PregameComponent } from './components/pregame/pregame.component';
 
 
 export const appRoutes: Routes = [
@@ -20,5 +20,10 @@ export const appRoutes: Routes = [
     path: 'pregame',
     component: PregameComponent
 
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'start-screen'
   }
 ];
