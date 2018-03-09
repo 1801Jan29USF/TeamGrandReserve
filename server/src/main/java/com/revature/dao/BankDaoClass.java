@@ -2,7 +2,11 @@ package com.revature.dao;
 
 import com.revature.entities.dbobjects.Bank;
 import com.revature.util.SessionUtil;
+
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.NonUniqueObjectException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
@@ -44,6 +48,16 @@ public class BankDaoClass implements BankDao{
         Bank b = (Bank) se.get(Bank.class, bid);
         se.close();
         return b;
+    }
+    
+    @Override
+    public List<Bank> getAll() {
+        Session se = su.getSession();
+        Criteria c = se.createCriteria(Bank.class);
+        List<Bank> bank = c.list();
+        System.out.println(bank);
+        se.close();
+        return bank;
     }
 
     @Override

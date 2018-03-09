@@ -1,5 +1,5 @@
 package com.revature.services;
 
-public interface InstructorServiceInterface {
+public interface InstructorServiceInterface extends GenericService {
 
 }

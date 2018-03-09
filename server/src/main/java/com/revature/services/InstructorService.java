@@ -9,7 +9,7 @@ import com.revature.entities.dbobjects.Bank;
 import com.revature.entities.dbobjects.Instructor;
 
 @Service
-public class InstructorService implements InstructorServiceInterface, GenericService{
+public class InstructorService implements InstructorServiceInterface {
 	private ObjectMapper om = new ObjectMapper();
 	@Autowired
 	private InstructorDao dao;
@@ -24,7 +24,7 @@ public class InstructorService implements InstructorServiceInterface, GenericSer
 	}
 
 	@Override
-	public Object getResponse(String id) {
+	public Instructor getResponse(String id) {
 		return dao.getByUsername(id);
 	}
 

@@ -19,7 +19,7 @@ import com.revature.services.GenericService;
 public abstract class EntityController {	
 	protected GenericService sp;
 	
-	@GetMapping("{id}")
+	@GetMapping("get/{id}")
 	public Object getById(@PathVariable String id) {return sp.getResponse(id);}
 	
 	@PostMapping("create")
