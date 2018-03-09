@@ -12,4 +12,6 @@ public interface GameServiceInterface {
 
 	boolean postUpdate(String o);
 
+	boolean selectCell(String code, int team, int cell);
+
 }

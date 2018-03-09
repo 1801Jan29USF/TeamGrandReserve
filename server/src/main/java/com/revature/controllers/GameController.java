@@ -31,8 +31,13 @@ public class GameController {
 	@PostMapping("update")
 	public boolean updateObject (@RequestBody String o) {return gs.postUpdate(o);}
 	
-	@PutMapping("put/{code}/{team}")
-	public boolean getById(@PathVariable String code, @PathVariable int team) {
+	@PutMapping("add-player/{code}/{team}")
+	public boolean addPlayer(@PathVariable String code, @PathVariable int team) {
 		return gs.addPlayer(code, team);
+	}
+	
+	@PutMapping("select-cell/{code}/{team}/{cell}")
+	public boolean selectCell(@PathVariable String code, @PathVariable int team, @PathVariable int cell) {
+		return gs.selectCell(code, team, cell);		
 	}
 }

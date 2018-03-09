@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.BankDao;
@@ -71,6 +72,13 @@ public class GameService implements GameServiceInterface {
 	public boolean addPlayer(String id, int team) {
 		findGame(id).getTeams().get(team).getPlayers().add(new Player(id));		
 		return false;		
+	}
+	
+	public boolean selectCell(String code, int team, int cell) {
+		Game g = findGame(code);
+		g.getTeams().get(team).setCurrentlySelected(cell);
+		return true;
+		
 	}
 	
 }

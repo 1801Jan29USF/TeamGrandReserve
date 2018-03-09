@@ -68,7 +68,7 @@ public class Game {
 		this.code = generateCode();
 		this.teams.add(new Team());
 		this.teams.add(new Team());
-		for(int i=0; i<16; i++) {
+		for(int i=0; i<25; i++) {
 			this.map.add(new Cell(i));
 		}
 	}
