@@ -49,11 +49,11 @@ public class GameService implements GameServiceInterface {
 
 
 	@Override
-	public String postCreate(String instructor) {
+	public Game postCreate(String instructor) {
 		Game g = new Game();
 		g.setInstructor((Instructor) is.getResponse(instructor));
 		gm.add(g);
-		return g.getCode();
+		return g;
 	}
 
 

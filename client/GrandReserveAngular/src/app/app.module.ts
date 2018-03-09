@@ -5,7 +5,7 @@ import { UIRouterModule } from '@uirouter/angular';
 import { NgbModule, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 
@@ -24,6 +24,7 @@ import { PregameComponent } from './components/pregame/pregame.component';
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
