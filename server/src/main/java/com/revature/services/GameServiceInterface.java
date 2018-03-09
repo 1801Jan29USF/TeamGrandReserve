@@ -6,7 +6,7 @@ public interface GameServiceInterface {
 
 	boolean addPlayer(String code, int team);
 
-	String postCreate(String o);
+	Game postCreate(String o);
 
 	Game getResponse(String id);
 
