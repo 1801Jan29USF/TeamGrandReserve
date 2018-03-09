@@ -1,18 +1,29 @@
 package com.revature.entities;
 
-import com.revature.entities.dbobjects.Question;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.revature.dao.QuestionDao;
+import com.revature.entities.dbobjects.Bank;
+import com.revature.entities.dbobjects.Question;
 
 /**
  * Functionality:
  */
+@Component("cell")
+@Scope(value="prototype")
 public class Cell {
 	private int cid;
 	private int value;
+	private int diffictulty;
+	private String subject;
 	private String color;
-	private ArrayList<Question> questionSet;
+	private List<Question> questionSet;
 
 	public int getCid() {
 		return cid;
@@ -38,7 +49,7 @@ public class Cell {
 		this.color = color;
 	}
 
-	public ArrayList<Question> getQuestionSet() {
+	public List<Question> getQuestionSet() {
 		return questionSet;
 	}
 
@@ -50,33 +61,30 @@ public class Cell {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Cell(int cid) {
+	
+	public Cell(int cid, Bank bank, QuestionDao qd) {
 		super();
 		this.cid = cid;
 		Random random = new Random();
 		this.value = (random.nextInt(9) + 1);
 		switch (cid) {
+		case 0:
 		case 1:
-		case 2:
-		case 6:
+		case 5:
 			this.color = "red";
 			break;
-		case 20:
+		case 19:
+		case 23:
 		case 24:
-		case 25:
 			this.color = "blue";
 			break;
 		default:
 			this.color = "white";
+			this.questionSet = qd.getByBid(bank.getBid());
+			this.diffictulty = bank.getDifficulty();
+			this.subject = bank.getSubject();
 			break;
 		}
-		this.questionSet = getQuestions(this.value);
-	}
-
-	private ArrayList<Question> getQuestions(int value) {
-
-		return null;
-
+		
 	}
 }

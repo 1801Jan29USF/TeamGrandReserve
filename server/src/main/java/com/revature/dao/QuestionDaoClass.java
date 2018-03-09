@@ -1,10 +1,15 @@
 package com.revature.dao;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.NonUniqueObjectException;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.revature.entities.dbobjects.Question;
@@ -50,7 +55,17 @@ public class QuestionDaoClass implements QuestionDao{
         se.close();
         return q;
     }
-
+    @Override
+    public List<Question> getByBid(int bid){
+        Session se = su.getSession();
+        String hql = "FROM Question WHERE bid.bid = :param_bid ";
+//        Integer b = Integer.valueOf(bid);
+        Query q = se.createQuery(hql);
+        q.setParameter("param_bid", bid);
+        List<Question> c = q.list();
+        se.close();
+        return c;
+    }
     @Override
     public void update(Question q) throws NonUniqueObjectException {
         Session se = su.getSession();

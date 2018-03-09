@@ -3,24 +3,25 @@ package com.revature.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.dao.BankDao;
 import com.revature.entities.Game;
 import com.revature.entities.Player;
-import com.revature.entities.dbobjects.Bank;
 import com.revature.entities.dbobjects.Instructor;
-import com.revature.entities.dbobjects.Question;
 
 @Service 
-public class GameService implements GameServiceInterface {
+public class GameService implements GameServiceInterface, ApplicationContextAware {
 	private ObjectMapper om = new ObjectMapper();	
 	private static List<Game> gm = new ArrayList<>();
 	@Autowired
 	InstructorServiceInterface is;
+	private ApplicationContext ac;
 	
 	private Game parseBody(String requestBody) {
 		try {
@@ -50,7 +51,7 @@ public class GameService implements GameServiceInterface {
 
 	@Override
 	public Game postCreate(String instructor) {
-		Game g = new Game();
+		Game g = (Game) ac.getBean("game");
 		g.setInstructor((Instructor) is.getResponse(instructor));
 		gm.add(g);
 		return g;
@@ -78,6 +79,12 @@ public class GameService implements GameServiceInterface {
 		Game g = findGame(code);
 		g.getTeams().get(team).setCurrentlySelected(cell);
 		return true;
+		
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
+		this.ac = arg0;
 		
 	}
 	

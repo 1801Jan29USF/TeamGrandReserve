@@ -11,7 +11,7 @@ public class Bank {
     @Column(name = "BID")
     @SequenceGenerator(name = "bank_seq", sequenceName = "bank_seq")
     @GeneratedValue(generator = "bank_seq", strategy = GenerationType.AUTO)
-    private int bid;
+    private Integer bid;
 
     @Column(name = "DIFFICULTY")
     private int difficulty;
