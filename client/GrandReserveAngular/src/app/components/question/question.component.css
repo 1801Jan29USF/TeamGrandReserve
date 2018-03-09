@@ -1,0 +1,37 @@
+input{
+  width:3em;
+  height:3em;
+  vertical-align: middle;
+
+}
+label{
+  vertical-align: middle;
+  font-size: 2vw;
+}
+h1{
+  font-size: 25pt;
+  word-wrap: break-word;
+  margin: auto;
+  padding: 20px;
+
+}
+h2{
+  font-size: 15pt;
+  word-wrap: break-word;
+}
+.container-fluid{
+  vertical-align: middle;
+  height: 100vh;
+  margin: auto;
+  display: grid;
+  align-content: center;
+}
+table{
+  border-collapse: separate;
+  vertical-align: middle;
+  margin: auto;
+
+}
+tr{
+  padding: 20vh;
+}

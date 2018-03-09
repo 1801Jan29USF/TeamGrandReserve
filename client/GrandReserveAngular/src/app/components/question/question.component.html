@@ -1,0 +1,50 @@
+<div class="container-fluid" align="center">
+  <h1>
+    {{question.text}}
+  </h1>
+  <form class="form-signin" id="submitTicket" (ngSubmit)="submitAnswer()">
+    <table class="table-bordered">
+      <tr>
+        <td>
+          <label>
+            <input type="radio" [(ngModel)]="selected" value=1 name="option">
+          </label>
+        </td>
+        <td>
+          <h2>{{question.option1}}</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            <input type="radio" [(ngModel)]="selected" value=2 name="option">
+          </label>
+        </td>
+        <td>
+          <h2>{{question.option2}}</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            <input type="radio" [(ngModel)]="selected" value=3 name="option">
+          </label>
+        </td>
+        <td>
+          <h2>{{question.option3}}</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            <input type="radio" [(ngModel)]="selected" value=4 name="option">
+          </label>
+        </td>
+        <td>
+          <h2>{{question.option4}}</h2>
+        </td>
+      </tr>
+    </table>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+  </form>
+</div>
