@@ -26,7 +26,7 @@ public class GameController {
 	public Game getById(@PathVariable String id) {return gs.getResponse(id);}
 	
 	@PostMapping("create")
-	public String createByObject (@RequestBody String o) {return gs.postCreate(o);}
+	public Game createByObject (@RequestBody String o) {return gs.postCreate(o);}
 	
 	@PostMapping("update")
 	public boolean updateObject (@RequestBody String o) {return gs.postUpdate(o);}

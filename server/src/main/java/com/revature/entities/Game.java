@@ -1,23 +1,32 @@
 package com.revature.entities;
 
-import com.revature.entities.dbobjects.Instructor;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.persistence.Entity;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import com.revature.dao.BankDao;
+import com.revature.dao.QuestionDao;
+import com.revature.entities.dbobjects.Bank;
+import com.revature.entities.dbobjects.Instructor;
 
 /**
  * Functionality:
  */
+@Component("game")
+@Scope(value="prototype")
 public class Game {
     private List<Cell> map= new ArrayList<>();
     private Instructor instructor;
     private List<Team> teams = new ArrayList<>();
     private final String code;
+    private ApplicationContext ac;
     
     public String generateCode() {
     	  
@@ -62,14 +71,20 @@ public class Game {
     public void setTeams(ArrayList<Team> teams) {
         this.teams = teams;
     }
-
-	public Game() {
+    @Autowired
+	public Game(BankDao bd, QuestionDao qd) {
 		super();
 		this.code = generateCode();
 		this.teams.add(new Team());
 		this.teams.add(new Team());
+		Random random = new Random();
+		System.out.println(bd);
+		
+		List<Bank> bList = bd.getAll();
+		int bNum = bList.size();
 		for(int i=0; i<25; i++) {
-			this.map.add(new Cell(i));
+			int r = random.nextInt(bNum);
+			this.map.add(new Cell(i, bList.get(r), qd));
 		}
 	}
 
@@ -77,5 +92,11 @@ public class Game {
 	public String toString() {
 		return "Game [map=" + map + ", instructor=" + instructor + ", teams=" + teams + ", code=" + code + "]";
 	}
+
+//	@Override
+//	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
+//		this.ac = arg0;
+//		
+//	}
     
 }

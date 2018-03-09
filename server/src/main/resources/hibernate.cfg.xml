@@ -10,8 +10,8 @@
         <property name="hibernate.connection.password">grandreserve</property>
 
         <!-- Some hibernate configurations -->
-        <!--<property name="show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>-->
+        <property name="show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
 
         <property name="hibernate.connection.pool_size">5</property>
         <mapping class="com.revature.entities.dbobjects.Instructor"/>
