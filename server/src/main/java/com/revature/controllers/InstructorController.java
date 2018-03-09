@@ -15,6 +15,6 @@ public class InstructorController extends EntityController{
 	
 	@Autowired
 	public InstructorController( InstructorServiceInterface myService) {	
-		this.sp = (GenericService) myService;
+		this.sp = myService;
 	}
 }

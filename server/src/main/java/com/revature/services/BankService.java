@@ -9,7 +9,7 @@ import com.revature.entities.dbobjects.Bank;
 import com.revature.entities.dbobjects.Question;
 
 @Service 
-public class BankService implements BankServiceInterface, GenericService{
+public class BankService implements BankServiceInterface{
 	private ObjectMapper om = new ObjectMapper();	
 	@Autowired
 	private BankDao dao;

@@ -1,16 +1,18 @@
 package com.revature.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Functionality:
  */
 public class Team {
-    private ArrayList<Player> players;
+    private List<Player> players = new ArrayList<>();
     private int teamLeader;
     private int points;
+    private int currentlySelected;
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -33,4 +35,22 @@ public class Team {
     public void setPoints(int points) {
         this.points = points;
     }
+
+	public Team() {
+		super();
+		this.teamLeader = 0;
+		this.points = 0;
+	}
+
+	public int getCurrentlySelected() {
+		return currentlySelected;
+	}
+
+	public void setCurrentlySelected(int currentlySelected) {
+		this.currentlySelected = currentlySelected;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
 }

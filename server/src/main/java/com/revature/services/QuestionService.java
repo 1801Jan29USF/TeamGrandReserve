@@ -10,7 +10,7 @@ import com.revature.dao.QuestionDao;
 import com.revature.entities.dbobjects.Question;
 
 @Service
-public class QuestionService implements QuestionServiceInterface, GenericService {
+public class QuestionService implements QuestionServiceInterface {
 	private ObjectMapper om = new ObjectMapper();
 	@Autowired
 	private QuestionDao dao;

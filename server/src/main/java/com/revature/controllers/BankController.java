@@ -15,6 +15,6 @@ public class BankController extends EntityController{
 	
 	@Autowired
 	public BankController( BankServiceInterface myService) {	
-		this.sp = (GenericService) myService;
+		this.sp = myService;
 	}
 }
