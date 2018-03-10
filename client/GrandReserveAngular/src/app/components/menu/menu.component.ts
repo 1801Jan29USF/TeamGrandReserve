@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Game } from '../../beans/game';
+import { Instructor } from '../../beans/instructor';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-ngbd-modal-content',
@@ -11,7 +16,8 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       </button>
     </div>
     <div class="modal-body">
-      <p>Hello, dude!</p>
+    <p>Difficulty:{{difficulty}}</p>
+    <p>Subject:{{subject}}</p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
@@ -20,7 +26,8 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class NgbdModalContentComponent {
-
+  @Input() difficulty;
+  @Input() subject;
   constructor(public activeModal: NgbActiveModal) { }
 }
 
@@ -30,13 +37,32 @@ export class NgbdModalContentComponent {
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
-  constructor(private modalService: NgbModal) { }
+  game: Game;
+  instructor: Instructor;
+  constructor(private modalService: NgbModal, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    this.startGame('finman');
   }
 
-  open() {
-    const modalRef = this.modalService.open(NgbdModalContentComponent);
+
+  startGame(name) {
+    this.client.post(`${environment.context}game/create`, name).subscribe(
+      (succ: Game) => {
+        this.game = succ;
+        console.log(this.game);
+      },
+      (err) => {
+        console.log('failed');
+      }
+    );
   }
+
+
+  open(i) {
+    const modalRef = this.modalService.open(NgbdModalContentComponent);
+    modalRef.componentInstance.difficulty = this.game.map[i].difficulty;
+    modalRef.componentInstance.subject = this.game.map[i].subject;
+  }
+
 }
