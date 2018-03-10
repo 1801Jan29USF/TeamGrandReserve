@@ -1,0 +1,14 @@
+<div class="container-fluid" align="center">
+  <form class="form-signin" id="submitGameRegis" (ngSubmit)="submitGameRegis()">
+    <label>
+      Game Code: <input class="text" [(ngModel)]=code name="code">
+    </label>
+    <label>
+      Name: <input class="text" [(ngModel)]=name name="name">
+    </label>
+    <label>
+      Team: <input class="text" [(ngModel)]=team name="team">
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+  </form>
+</div>

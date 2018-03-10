@@ -14,7 +14,8 @@ import { appRoutes } from './routes';
 import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { PregameComponent } from './components/pregame/pregame.component';
-import {QuestionComponent} from './components/question/question.component';
+import {QuestionComponent} from "./components/question/question.component";
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 
 
@@ -34,7 +35,8 @@ import {QuestionComponent} from './components/question/question.component';
     QuestionComponent,
     NgbdModalContentComponent,
     StartScreenComponent,
-    PregameComponent
+    PregameComponent,
+    UserLoginComponent
   ],
   providers: [
 
