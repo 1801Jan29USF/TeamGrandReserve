@@ -22,9 +22,9 @@ export class UserLoginComponent implements OnInit {
   submitGameRegis() {
     let url = (this.code).concat('/').concat(this.team).concat('/').concat(this.name);
     console.log(url);
-    this.client.get(`${environment.context}add-player/`.concat(url)).subscribe(
+    this.client.get(`${environment.context}game/add-player/`.concat(url)).subscribe(
       (succ) => {
-        this.router.navigateByUrl('/menu');
+        this.router.navigateByUrl('/pregame');
       },
       (err) => {
         console.log('failed');
