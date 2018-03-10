@@ -1,6 +1,9 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.entities.Game;
+import com.revature.entities.dbobjects.Question;
 import com.revature.services.GameServiceInterface;
 
-@Controller
+@Controller("GameController")
 @RestController
 @RequestMapping("game")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -32,13 +36,19 @@ public class GameController {
 	@PostMapping("update")
 	public boolean updateObject (@RequestBody String o) {return gs.postUpdate(o);}
 	
-	@PutMapping("add-player/{code}/{team}")
-	public boolean addPlayer(@PathVariable String code, @PathVariable int team) {
-		return gs.addPlayer(code, team);
+	@GetMapping("add-player/{code}/{team}/{name}")
+	public Game addPlayer(@PathVariable String code, @PathVariable int team, @PathVariable String name) {
+		return gs.addPlayer(code, team, name);
 	}
 	
 	@PutMapping("select-cell/{code}/{team}/{cell}")
 	public boolean selectCell(@PathVariable String code, @PathVariable int team, @PathVariable int cell) {
 		return gs.selectCell(code, team, cell);		
 	}
+	
+//    @MessageMapping("websocket")
+//    @SendTo("topic/question")
+//    public Question sendQuestion(Question question) {   	
+//    	return question;
+//    }
 }
