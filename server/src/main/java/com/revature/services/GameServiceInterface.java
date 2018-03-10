@@ -4,7 +4,7 @@ import com.revature.entities.Game;
 
 public interface GameServiceInterface {
 
-	boolean addPlayer(String code, int team);
+	Game addPlayer(String code, int team, String name);
 
 	Game postCreate(String o);
 
