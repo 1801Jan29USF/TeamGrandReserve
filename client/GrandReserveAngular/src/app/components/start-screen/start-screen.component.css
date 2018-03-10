@@ -6,17 +6,17 @@
     padding: 1em;
     text-align: center;
     font-family: 'Press Start 2P', cursive;
-    color: rgb(19, 18, 18); 
-    text-shadow: 1px 1px #3527fe, 
-                2px 2px lightpink, 
+    color: rgb(19, 18, 18);
+    text-shadow: 1px 1px #3527fe,
+                2px 2px lightpink,
                 3px 3px red;
 }
 h1{
-  overflow: hidden; /* Ensures the content is not revealed until the animation */ 
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .15em; /* Adjust as needed */
   font-size: 28px;
-  animation: 
+  animation:
     typing 3.5s steps(30, end),
     blink-caret .75s step-end infinite,
     dis 2.75s step-end ,
@@ -27,7 +27,7 @@ h1{
     from { width: 0 }
     to { width: 100% }
   }
-  
+
   /* The typewriter cursor effect */
   @keyframes blink-caret {
     from, to { border-color: transparent }
@@ -46,7 +46,7 @@ h1{
 
 h3{
     font-size: 20px;
-    animation: 
+    animation:
     fadeIn 5s;
 }
 
@@ -59,7 +59,7 @@ h3{
     margin-top:10%;
     padding: .5em;
     width:60%;
-    
+
 }
 
 .start-buttons .btn{
@@ -77,17 +77,17 @@ box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
     from {
       opacity: 0;
     }
-  
+
     to {
       opacity: 1;
     }
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
     }
-  
+
     to {
       opacity: 1;
     }

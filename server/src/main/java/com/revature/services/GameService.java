@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.controllers.GameController;
 import com.revature.entities.Game;
 import com.revature.entities.Player;
 import com.revature.entities.dbobjects.Instructor;
@@ -70,14 +71,17 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 		return false;
 	}
 	
-	public boolean addPlayer(String id, int team) {
-		findGame(id).getTeams().get(team).getPlayers().add(new Player(id));		
-		return false;		
+	public Game addPlayer(String code, int team, String name) {
+		Game g = findGame(code);
+		g.getTeams().get(team).getPlayers().add(new Player(name));		
+		return g;		
 	}
 	
 	public boolean selectCell(String code, int team, int cell) {
-		Game g = findGame(code);
-		g.getTeams().get(team).setCurrentlySelected(cell);
+//		Game g = findGame(code);
+//		g.getTeams().get(team).setCurrentlySelected(cell);	
+//		GameController cg = (GameController) ac.getBean("GameController");
+//		cg.sendQuestion(g.getMap().get(cell).getQuestionSet().get(0));
 		return true;
 		
 	}
