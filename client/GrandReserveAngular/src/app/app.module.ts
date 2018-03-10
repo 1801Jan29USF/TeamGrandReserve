@@ -15,6 +15,7 @@ import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { PregameComponent } from './components/pregame/pregame.component';
 import {QuestionComponent} from './components/question/question.component';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 
 
@@ -34,7 +35,8 @@ import {QuestionComponent} from './components/question/question.component';
     QuestionComponent,
     NgbdModalContentComponent,
     StartScreenComponent,
-    PregameComponent
+    PregameComponent,
+    GameOverComponent
   ],
   providers: [
 
