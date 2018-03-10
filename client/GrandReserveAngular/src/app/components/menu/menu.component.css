@@ -14,7 +14,13 @@
 
 .col-blue{
     background-color:blue;
-    color:whitesmoke;
+    
+}
+
+aside h1{
+    padding: 2px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
 }
 
 .container{
@@ -61,9 +67,13 @@
 }
 
 .btn-warning{
-   
+    margin-top: 3em;
     bottom: 0;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
+ table{
+     text-align: left;
+     color:whitesmoke;
+ }

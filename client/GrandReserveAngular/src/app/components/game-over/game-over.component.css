@@ -1,0 +1,138 @@
+.form-header{
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+}
+.form-container{
+    margin-top: 3em;
+    width: 50%;
+    animation:fadeIn 1.5s;
+    animation-fill-mode: backwards;
+    animation-delay: 1.5s;
+}
+
+.col{
+    padding: 1em;
+}
+
+.blue thead{
+    background-color: blue;
+    color:whitesmoke;
+    border-radius: 2px;
+}
+
+.red thead{
+    background-color: red;
+    color:whitesmoke;
+}
+table{
+    -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+}
+.game{
+    overflow: hidden; /* Ensures the content is not revealed until the animation */ 
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    font-size: 4em;
+    text-align: center;
+    animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .75s step-end infinite,
+    dis 1s step-end ,
+    wraps 3s step-end;
+    
+}
+
+.over{
+    overflow: hidden; /* Ensures the content is not revealed until the animation */ 
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    font-size: 4em;
+    text-align: center;
+    animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .75s step-end infinite,
+    dis 1s step-end ,
+    wraps 3s step-end;   
+}
+
+h2{
+    
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 1px 1px #3527fe, 
+                2px 2px lightpink, 
+                3px 3px red;
+    
+}
+header{
+    padding:1em;
+    border-radius: 5px;
+    
+    margin-top: 3em;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 1px 1px #3527fe, 
+                2px 2px lightpink, 
+                3px 3px red;                
+}
+.buttons{
+    width:38%;
+}
+.buttons .btn{
+    margin-left:auto; 
+    margin-right:auto; 
+    text-align: center;
+    font-size: 3vw;
+    animation: showb 1.5s;
+    animation-fill-mode: backwards;
+    animation-delay: 1.5s;
+    -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: black; }
+  }
+
+  @keyframes dis {
+      from{border-right: .15em solid black; /* The typwriter cursor */}
+      to{border-right: none}
+  }
+  @keyframes wraps {
+    from{white-space: nowrap /* Keeps the content on a single line */}
+    to{white-space: pre-wrap}
+}
+  @keyframes showb{
+      from{
+        visibility: hidden;
+      }
+      to{
+        visibility: visible;
+      }
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }

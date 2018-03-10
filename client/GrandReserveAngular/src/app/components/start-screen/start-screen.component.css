@@ -40,8 +40,8 @@ h1{
   }
 
   @keyframes wraps {
-      from{white-space: nowrap; /* Keeps the content on a single line */}
-      to{white-space: pre-wrap;}
+      from{white-space: nowrap /* Keeps the content on a single line */}
+      to{white-space: pre-wrap}
   }
 
 h3{
@@ -68,6 +68,9 @@ h3{
     margin-bottom: 1em;
     text-align: center;
     font-size: 5vw;
+    -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
 }
 
 @-webkit-keyframes fadeIn {
