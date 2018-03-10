@@ -12,8 +12,7 @@ import { Instructor } from '../../beans/instructor';
   styleUrls: ['./pregame.component.css']
 })
 export class PregameComponent implements OnInit {
-  game: Game;
-  instructor: Instructor;
+
   // this is all dummy values for testing
   redTeam = [
     {
@@ -80,17 +79,8 @@ export class PregameComponent implements OnInit {
     }
   }
 
-  startGame(name) {
-    this.client.post(`${environment.context}game/create`, name).subscribe(
-      (succ: Game) => {
-        this.game = succ;
-        console.log(this.game);
-        this.router.navigateByUrl('/menu');
-      },
-      (err) => {
-        console.log('failed');
-      }
-    );
+  startGame() {
+    this.router.navigateByUrl('/menu');
   }
 
 }

@@ -14,7 +14,7 @@ import { appRoutes } from './routes';
 import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { PregameComponent } from './components/pregame/pregame.component';
-import {QuestionComponent} from "./components/question/question.component";
+import {QuestionComponent} from './components/question/question.component';
 
 
 
@@ -31,7 +31,7 @@ import {QuestionComponent} from "./components/question/question.component";
     AppComponent,
     NavComponent,
     MenuComponent,
-    QuestionComponent
+    QuestionComponent,
     NgbdModalContentComponent,
     StartScreenComponent,
     PregameComponent

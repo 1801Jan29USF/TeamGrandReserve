@@ -20,13 +20,29 @@ import com.revature.entities.dbobjects.Question;
 public class Cell {
 	private int cid;
 	private int value;
-	private int diffictulty;
+	private int difficulty;
 	private String subject;
 	private String color;
 	private List<Question> questionSet;
 
 	public int getCid() {
 		return cid;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int diffictulty) {
+		this.difficulty = diffictulty;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public void setCid(int cid) {
@@ -81,7 +97,7 @@ public class Cell {
 		default:
 			this.color = "white";
 			this.questionSet = qd.getByBid(bank.getBid());
-			this.diffictulty = bank.getDifficulty();
+			this.difficulty = bank.getDifficulty();
 			this.subject = bank.getSubject();
 			break;
 		}
