@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Router} from "@angular/router";
+import {HttpClient} from '@angular/common/http';
+import {Game} from '../../beans/game';
+import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import {Game} from "../../beans/game";
+
 
 @Component({
   selector: 'app-user-login',

@@ -1,14 +1,34 @@
-<div class="container-fluid" align="center">
+<div class="container form-cont" align="center">
   <form class="form-signin" id="submitGameRegis" (ngSubmit)="submitGameRegis()">
-    <label>
-      Game Code: <input class="text" [(ngModel)]=code name="code">
-    </label>
-    <label>
-      Name: <input class="text" [(ngModel)]=name name="name">
-    </label>
-    <label>
-      Team: <input class="text" [(ngModel)]=team name="team">
-    </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <h2>User Sign in</h2>
+    <br>
+    <div class="form-row one">
+      <label>
+        Game Code:
+        <br>
+        <input class="text" [(ngModel)]=code name="code">
+      </label>
+    </div>
+    <div class="form-row two">
+      <div class="col">
+        <label>
+          Username:
+        </label>
+          <br>
+          <input class="text" [(ngModel)]=name name="name">
+          
+      </div>
+      <div class="col">
+        <label>
+          Team:
+        </label>
+          <br>
+          <input class="text" [(ngModel)]=team name="team">
+        
+      </div>
+    </div>
+    <div class="container btn-cont">
+      <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Submit</button>
+    </div>
   </form>
 </div>
