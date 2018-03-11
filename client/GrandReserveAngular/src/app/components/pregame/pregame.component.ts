@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Game } from '../../beans/game';
 import { environment } from '../../../environments/environment';
 import { Instructor } from '../../beans/instructor';
-import {Team} from "../../beans/team";
-import {Player} from "../../beans/player";
+import { Team } from '../../beans/team';
+import { Player } from '../../beans/player';
 
 @Component({
   selector: 'app-pregame',
@@ -14,7 +14,7 @@ import {Player} from "../../beans/player";
   styleUrls: ['./pregame.component.css']
 })
 export class PregameComponent implements OnInit {
-  code = decodeURIComponent(document.cookie).substr('game-code='.length+1, 4);
+  code = decodeURIComponent(document.cookie).substr('game-code='.length + 1, 4);
   redTeam: Team = new Team;
   blueTeam: Team = new Team;
   constructor(private client: HttpClient, private router: Router) { }
@@ -35,7 +35,7 @@ export class PregameComponent implements OnInit {
   }
 
   setLeader(player: Player) {
-    //TODO: this doesn't work when you get to game screen, need db calls here to keep changes
+    // TODO: this doesn't work when you get to game screen, need db calls here to keep changes
     if (!player.isCaptain) {
       if (this.redTeam.players.includes(player)) {
         this.redTeam.players.forEach(function (value) {

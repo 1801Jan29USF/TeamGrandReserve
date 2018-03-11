@@ -7,11 +7,11 @@
         Instructor Username:
       </label>
       <br>
-      <input class="text" name="name">
+      <input class="text" name="name"[(ngModel)]="name">
 
     </div>
     <div class="container btn-cont">
-      <button class="btn btn-lg btn-outline-primary btn-block" type="submit" routerLink="/pregame">Submit</button>
+      <button class="btn btn-lg btn-outline-primary btn-block" type="submit" (click)="startGame()">Begin</button>
     </div>
   </form>
 </div>

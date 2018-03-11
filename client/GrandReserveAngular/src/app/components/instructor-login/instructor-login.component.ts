@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Game } from '../../beans/game';
+import { CookieService } from 'angular2-cookie/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-login',
@@ -6,10 +11,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./instructor-login.component.css']
 })
 export class InstructorLoginComponent implements OnInit {
-
-  constructor() { }
+  game: Game = new Game;
+  name: string;
+  constructor(private cookie: CookieService, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
 
+  startGame() {
+    this.client.post(`${environment.context}game/create/`, this.name).subscribe(
+      (succ: Game) => {
+        this.game = succ;
+        this.cookie.putObject('game-code', succ.code);
+        this.cookie.putObject('instructor', succ.instructor);
+        this.router.navigateByUrl('/pregame');
+      },
+      (err) => {
+        console.log('failed');
+      }
+    );
+  }
 }

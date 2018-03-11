@@ -38,12 +38,18 @@ export class NgbdModalContentComponent {
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  code = decodeURIComponent(document.cookie).substr('game-code='.length+1, 4);
+  decoded = decodeURIComponent(document.cookie);
+  code = this.decoded.substr('game-code='.length + 1, 4);
+  isPlayer = !this.decoded.includes('instructor=');
+  player;
   game: Game = new Game;
-  player = decodeURIComponent(document.cookie).substr('game-code=\'xxxx\';user='.length);
+  if(isPlayer) {
+    this.player = decodeURIComponent(document.cookie).substr('game-code=\'xxxx\';user='.length);
+  }
   constructor(private modalService: NgbModal, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    console.log(document.cookie);
     this.startGame();
   }
 

@@ -4,21 +4,14 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Team</th>
           <th scope="col">Points</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Red</td>
-          <td>1000</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Blue</td>
-          <td>900</td>
+        <tr *ngFor="let team of game.teams">
+          <td>{{team.teamLeader}}</td>
+          <td>{{team.points}}</td>
         </tr>
       </tbody>
     </table>
@@ -28,20 +21,18 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Username</th>
           <th scope="col">Points</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>1000</td>
+        <tr *ngFor="let player of game.teams[0]?.players">
+          <td>{{player.name}}</td>
+          <td>{{player.points}}</td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn btn-warning" routerLink="/game-over">End Game</button>
+    <button class="btn btn btn-warning" *ngIf="!isPlayer" routerLink="/game-over">End Game</button>
   </aside>
   <div class="container">
     <div class="row">
