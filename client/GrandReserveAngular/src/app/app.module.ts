@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
+import {CookieService} from 'angular2-cookie/core';
 
 import { appRoutes } from './routes';
 
@@ -45,7 +46,7 @@ import { InstructorLoginComponent } from './components/instructor-login/instruct
     InstructorLoginComponent
   ],
   providers: [
-
+    CookieService
   ],
   entryComponents: [
     NgbdModalContentComponent

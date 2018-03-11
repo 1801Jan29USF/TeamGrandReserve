@@ -38,20 +38,20 @@ export class NgbdModalContentComponent {
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  game: Game;
-  instructor: Instructor;
+  code = decodeURIComponent(document.cookie).substr('game-code='.length+1, 4);
+  game: Game = new Game;
+  player = decodeURIComponent(document.cookie).substr('game-code=\'xxxx\';user='.length);
   constructor(private modalService: NgbModal, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.startGame('finman');
+    this.startGame();
   }
 
 
-  startGame(name) {
-    this.client.post(`${environment.context}game/create`, name).subscribe(
+  startGame() {
+    this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.game = succ;
-        console.log(this.game);
       },
       (err) => {
         console.log('failed');

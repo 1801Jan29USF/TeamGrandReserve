@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Game} from '../../beans/game';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
 
 @Component({
   selector: 'app-user-login',
@@ -14,7 +16,7 @@ export class UserLoginComponent implements OnInit {
   name;
   team;
 
-  constructor(private client: HttpClient, private router: Router) { }
+  constructor(private client: HttpClient, private router: Router, private cookie: CookieService) { }
 
   ngOnInit() {
   }
@@ -23,8 +25,11 @@ export class UserLoginComponent implements OnInit {
     let url = (this.code).concat('/').concat(this.team).concat('/').concat(this.name);
     console.log(url);
     this.client.get(`${environment.context}game/add-player/`.concat(url)).subscribe(
-      (succ) => {
+      (succ: Game) => {
+        this.cookie.putObject('game-code', succ.code);
+        this.cookie.putObject('user', this.name);
         this.router.navigateByUrl('/pregame');
+
       },
       (err) => {
         console.log('failed');

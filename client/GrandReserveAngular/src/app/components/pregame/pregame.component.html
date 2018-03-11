@@ -8,8 +8,8 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let player of redTeam">
-          <td *ngIf="player.leader">{{player.name}}</td>
+        <tr *ngFor="let player of redTeam.players">
+          <td *ngIf="player.isCaptain">{{player.name}}</td>
         </tr>
       </tbody>
     </table>
@@ -20,8 +20,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let player of redTeam">
-        <td (click)="setLeader(player)" *ngIf="!player.leader">{{player.name}}</td>
+      <tr *ngFor="let player of redTeam.players">
+        <td (click)="setLeader(player)" *ngIf="!player.isCaptain">{{player.name}}</td>
       </tr>
       </tbody>
     </table>
@@ -35,8 +35,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let player of blueTeam">
-        <td *ngIf="player.leader">{{player.name}}</td>
+      <tr *ngFor="let player of blueTeam.players">
+        <td *ngIf="player.isCaptain">{{player.name}}</td>
       </tr>
       </tbody>
     </table>
@@ -47,8 +47,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let player of blueTeam">
-        <td (click)="setLeader(player)" *ngIf="!player.leader">{{player.name}}</td>
+      <tr *ngFor="let player of blueTeam.players">
+        <td (click)="setLeader(player)" *ngIf="!player.isCaptain">{{player.name}}</td>
       </tr>
       </tbody>
     </table>
@@ -56,7 +56,7 @@
   <div class="container">
     <label id="code_label">Code</label>
     <br>
-    <label id="code">3N8H</label>
+    <label id="code">{{code}}</label>
     <br>
     <button class="btn btn-primary" (click)="startGame()">Start Game!</button>
   </div>
