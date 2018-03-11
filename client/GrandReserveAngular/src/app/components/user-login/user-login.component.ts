@@ -22,7 +22,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   submitGameRegis() {
-    let url = (this.code).concat('/').concat(this.team).concat('/').concat(this.name);
+    const url = (this.code.toLowerCase()).concat('/').concat(this.team).concat('/').concat(this.name);
     console.log(url);
     this.client.get(`${environment.context}game/add-player/`.concat(url)).subscribe(
       (succ: Game) => {
