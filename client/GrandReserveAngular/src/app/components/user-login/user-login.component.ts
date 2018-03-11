@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Game} from "../../beans/game";
-import {environment} from "../../../environments/environment";
-import {Router} from "@angular/router";
+import {HttpClient} from '@angular/common/http';
+import {Game} from '../../beans/game';
+import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
