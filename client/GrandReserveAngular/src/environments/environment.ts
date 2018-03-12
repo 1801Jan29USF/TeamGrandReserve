@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  context: 'http://localhost:8080/server/'
+  context: 'http://localhost:8080/server/',
+  ws: 'ws://localhost:8080/server/'
 };

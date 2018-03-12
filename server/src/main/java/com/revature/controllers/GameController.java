@@ -18,7 +18,7 @@ import com.revature.entities.Game;
 import com.revature.entities.dbobjects.Question;
 import com.revature.services.GameServiceInterface;
 
-@Controller("GameController")
+@Controller
 @RestController
 @RequestMapping("game")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -41,14 +41,8 @@ public class GameController {
 		return gs.addPlayer(code, team, name);
 	}
 	
-	@PutMapping("select-cell/{code}/{team}/{cell}")
+	@GetMapping("select-cell/{code}/{team}/{cell}")
 	public boolean selectCell(@PathVariable String code, @PathVariable int team, @PathVariable int cell) {
 		return gs.selectCell(code, team, cell);		
 	}
-	
-//    @MessageMapping("websocket")
-//    @SendTo("topic/question")
-//    public Question sendQuestion(Question question) {   	
-//    	return question;
-//    }
 }

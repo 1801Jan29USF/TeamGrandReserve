@@ -50,7 +50,7 @@ export class MenuComponent implements OnInit {
     this.client.post(`${environment.context}game/create`, name).subscribe(
       (succ: Game) => {
         this.game = succ;
-        console.log(this.game);
+        console.log(this.game.code);
       },
       (err) => {
         console.log('failed');

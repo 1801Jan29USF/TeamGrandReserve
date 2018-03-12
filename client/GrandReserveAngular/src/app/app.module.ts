@@ -15,6 +15,8 @@ import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { PregameComponent } from './components/pregame/pregame.component';
 import {QuestionComponent} from './components/question/question.component';
+import { WebsocketService } from './services/websocket.service';
+import { StompService } from 'ng2-stomp-service';
 
 
 
@@ -37,7 +39,8 @@ import {QuestionComponent} from './components/question/question.component';
     PregameComponent
   ],
   providers: [
-
+    WebsocketService,
+    StompService
   ],
   entryComponents: [
     NgbdModalContentComponent

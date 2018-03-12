@@ -78,12 +78,9 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 	}
 	
 	public boolean selectCell(String code, int team, int cell) {
-//		Game g = findGame(code);
-//		g.getTeams().get(team).setCurrentlySelected(cell);	
-//		GameController cg = (GameController) ac.getBean("GameController");
-//		cg.sendQuestion(g.getMap().get(cell).getQuestionSet().get(0));
-		return true;
-		
+		Game g = findGame(code);
+		g.getTeams().get(team).setCurrentlySelected(cell);	
+		return true;		
 	}
 
 	@Override
