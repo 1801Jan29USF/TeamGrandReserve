@@ -58,6 +58,8 @@ export class MenuComponent implements OnInit {
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.game = succ;
+        console.log(this.game.code);
+
       },
       (err) => {
         console.log('failed');

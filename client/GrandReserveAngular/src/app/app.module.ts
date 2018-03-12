@@ -17,10 +17,11 @@ import { StartScreenComponent } from './components/start-screen/start-screen.com
 import { PregameComponent } from './components/pregame/pregame.component';
 
 import {QuestionComponent} from './components/question/question.component';
+import { WebsocketService } from './services/websocket.service';
+import { StompService } from 'ng2-stomp-service';
 import { GameOverComponent } from './components/game-over/game-over.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { InstructorLoginComponent } from './components/instructor-login/instructor-login.component';
-
 
 
 
@@ -46,6 +47,8 @@ import { InstructorLoginComponent } from './components/instructor-login/instruct
     InstructorLoginComponent
   ],
   providers: [
+    WebsocketService,
+    StompService,
     CookieService
   ],
   entryComponents: [

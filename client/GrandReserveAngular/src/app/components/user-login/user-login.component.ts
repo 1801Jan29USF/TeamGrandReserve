@@ -27,8 +27,7 @@ export class UserLoginComponent implements OnInit {
     this.client.get(`${environment.context}game/add-player/`.concat(url)).subscribe(
       (succ: Game) => {
         this.cookie.putObject('game-code', succ.code);
-        this.cookie.putObject('user', this.name);
-        this.router.navigateByUrl('/pregame');
+         this.router.navigateByUrl('/pregame');
 
       },
       (err) => {
