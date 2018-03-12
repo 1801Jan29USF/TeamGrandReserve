@@ -6,7 +6,7 @@ import { StompService } from 'ng2-stomp-service';
 
 
 @Injectable()
-export class WebsocketService implements OnInit {
+export class WebsocketService {
 
 
   private wsConf: any = {
@@ -15,8 +15,7 @@ export class WebsocketService implements OnInit {
   private subscription: any;
   constructor(private stomp: StompService) {
   }
-  ngOnInit() {
-  }
+
   initializeWebSocketConnection() {
 
     this.stomp.configure(this.wsConf);
