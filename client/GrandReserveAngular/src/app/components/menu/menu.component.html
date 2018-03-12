@@ -1,40 +1,38 @@
 <div class="container-fluid">
   <aside class="sidebar">
     <h1>Game leader board</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Team</th>
+          <th scope="col">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of game.teams">
+          <td>{{team.teamLeader}}</td>
+          <td>{{team.points}}</td>
+        </tr>
+      </tbody>
+    </table>
   </aside>
   <aside class="sidebar2">
     <h1>Team leader board</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Username</th>
+          <th scope="col">Points</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+        <tr *ngFor="let player of game.teams[0]?.players">
+          <td>{{player.name}}</td>
+          <td>{{player.points}}</td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn btn-warning" disabled>End Game</button>
+    <button class="btn btn btn-warning" *ngIf="!isPlayer" routerLink="/game-over">End Game</button>
   </aside>
   <div class="container">
     <div class="row">

@@ -8,15 +8,20 @@ import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
+import {CookieService} from 'angular2-cookie/core';
 
 import { appRoutes } from './routes';
 
 import { MenuComponent, NgbdModalContentComponent } from './components/menu/menu.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { PregameComponent } from './components/pregame/pregame.component';
+
 import {QuestionComponent} from './components/question/question.component';
 import { WebsocketService } from './services/websocket.service';
 import { StompService } from 'ng2-stomp-service';
+import { GameOverComponent } from './components/game-over/game-over.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { InstructorLoginComponent } from './components/instructor-login/instructor-login.component';
 
 
 
@@ -36,11 +41,15 @@ import { StompService } from 'ng2-stomp-service';
     QuestionComponent,
     NgbdModalContentComponent,
     StartScreenComponent,
-    PregameComponent
+    PregameComponent,
+    GameOverComponent,
+    UserLoginComponent,
+    InstructorLoginComponent
   ],
   providers: [
     WebsocketService,
-    StompService
+    StompService,
+    CookieService
   ],
   entryComponents: [
     NgbdModalContentComponent

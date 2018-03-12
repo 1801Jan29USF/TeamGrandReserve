@@ -10,17 +10,18 @@ import { environment } from '../../../environments/environment';
   selector: 'app-ngbd-modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Hi there!</h4>
+      <h4 class="modal-title">Are you sure?</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-    <p>Difficulty:{{difficulty}}</p>
-    <p>Subject:{{subject}}</p>
+    <p>Difficulty: {{difficulty}}</p>
+    <p>Subject: {{subject}}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click')" routerLink="/question">Begin</button>
+      <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
 })
@@ -37,20 +38,30 @@ export class NgbdModalContentComponent {
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  game: Game;
-  instructor: Instructor;
+  decoded = decodeURIComponent(document.cookie);
+  code = this.decoded.substr('game-code='.length + 1, 4);
+  isPlayer = !this.decoded.includes('instructor=');
+  player;
+  game: Game = new Game;
+  if(isPlayer) {
+    this.player = decodeURIComponent(document.cookie).substr('game-code=\'xxxx\';user='.length);
+  }
   constructor(private modalService: NgbModal, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.startGame('finman');
+    console.log(document.cookie);
+    this.startGame();
   }
 
 
-  startGame(name) {
-    this.client.post(`${environment.context}game/create`, name).subscribe(
+  startGame() {
+    this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.game = succ;
+<<<<<<< HEAD
         console.log(this.game.code);
+=======
+>>>>>>> master
       },
       (err) => {
         console.log('failed');

@@ -9,6 +9,9 @@ export class Game {
     code: string;
 
     constructor() {
-
+      this.map = [];
+      this.instructor = new Instructor();
+      this.teams = [];
+      this.code = '';
     }
 }
