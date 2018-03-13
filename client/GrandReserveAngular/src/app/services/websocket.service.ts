@@ -15,24 +15,30 @@ export class WebsocketService {
   private subscription: any;
   constructor(private stomp: StompService) {
   }
+  private data: any;
 
-  initializeWebSocketConnection() {
+  initializeWebSocketConnection(channel: string) {
 
     this.stomp.configure(this.wsConf);
 
     this.stomp.startConnect().then(() => {
       console.log('connected');
-      this.subscription = this.stomp.subscribe('/chat', this.response);
+      this.subscription = this.stomp.subscribe(`/${channel}`, this.response);
     });
 
   }
 
-  sendMessage(message) {
-    this.stomp.send('/app/send/message', {'message': message});
+  sendPLayer(player) {
+    this.stomp.send('/app/send/player', {'player': player});
+  }
+
+  sendQuestion(player) {
+    this.stomp.send('/app/send/question', {});
   }
 
   public response = (data) => {
     console.log(data);
+    this.data = data;
   }
 
 }

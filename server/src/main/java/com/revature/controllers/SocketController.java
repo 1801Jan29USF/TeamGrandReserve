@@ -19,10 +19,18 @@ public class SocketController {
 			this.template = template;
 		}
 		
-		@MessageMapping("/send/message")
-		@SendTo("/chat")
+		@MessageMapping("/send/player")
+		@SendTo("/player")
+		public String onPlayerAdd(String message) {
+			System.out.println("here");
+			return message;
+		}
+		
+		@MessageMapping("/send/question")
+		@SendTo("/question")
 		public String onRecievedMessage(String message) {
 			System.out.println("here");
 			return message;
 		}
+		
 }

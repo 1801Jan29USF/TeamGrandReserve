@@ -53,7 +53,7 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 	@Override
 	public Game postCreate(String instructor) {
 		Game g = (Game) ac.getBean("game");
-		g.setInstructor((Instructor) is.getResponse(instructor));
+		g.setInstructor(new Instructor(instructor, null));
 		gm.add(g);
 		return g;
 	}
