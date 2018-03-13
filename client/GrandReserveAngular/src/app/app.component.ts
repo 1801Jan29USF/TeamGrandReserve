@@ -1,4 +1,8 @@
 import { Component,  OnInit } from '@angular/core';
+import { WebsocketService } from './services/websocket.service';
+import { Team } from './beans/team';
+import { Subject } from 'rxjs/Subject';
+import { Player } from './beans/player';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +17,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit()  {
+    WebsocketService.teams[0] = new Subject<Player>();
+    WebsocketService.teams[1] = new Subject<Player>();
+    console.log(WebsocketService.teams);
     // called after the constructor and called  after the first ngOnChanges()
     this.yup = 'yes';
   }

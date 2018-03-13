@@ -7,6 +7,10 @@ import { environment } from '../../../environments/environment';
 import { Instructor } from '../../beans/instructor';
 import { Team } from '../../beans/team';
 import { Player } from '../../beans/player';
+import { WebsocketService } from '../../services/websocket.service';
+import { AsyncPipe } from '@angular/common';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-pregame',
@@ -14,19 +18,27 @@ import { Player } from '../../beans/player';
   styleUrls: ['./pregame.component.css']
 })
 export class PregameComponent implements OnInit {
-  decoded : string = decodeURIComponent(document.cookie);
+  decoded: string = decodeURIComponent(document.cookie);
   code = this.decoded.substr(this.decoded.indexOf('game-code="') + 'game-code="'.length, 4);
   redTeam: Team = new Team;
   blueTeam: Team = new Team;
-  constructor(private client: HttpClient, private router: Router) { }
+
+  constructor(private client: HttpClient, private router: Router, private ws: WebsocketService) { }
 
   ngOnInit() {
+    this.ws.initializeWebSocketConnection('player');
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
-        console.log(succ);
-        this.code = succ.code.toUpperCase();
-        this.redTeam = succ.teams[0];
-        this.blueTeam = succ.teams[1];
+         console.log(succ);
+         this.code = succ.code.toUpperCase();
+         this.redTeam = succ.teams[0];
+         this.blueTeam = succ.teams[1];
+         WebsocketService.teams[0].subscribe((player: Player) => {
+            this.redTeam.players.push(player);
+         });
+         WebsocketService.teams[1].subscribe((player: Player) => {
+          this.redTeam.players.push(player);
+         });
 
       },
       (err) => {
