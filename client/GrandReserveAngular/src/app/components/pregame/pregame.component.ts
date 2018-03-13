@@ -14,7 +14,8 @@ import { Player } from '../../beans/player';
   styleUrls: ['./pregame.component.css']
 })
 export class PregameComponent implements OnInit {
-  code = decodeURIComponent(document.cookie).substr('game-code='.length + 1, 4);
+  decoded : string = decodeURIComponent(document.cookie);
+  code = this.decoded.substr(this.decoded.indexOf('game-code="') + 'game-code="'.length, 4);
   redTeam: Team = new Team;
   blueTeam: Team = new Team;
   constructor(private client: HttpClient, private router: Router) { }

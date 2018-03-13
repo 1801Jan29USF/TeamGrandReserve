@@ -5,6 +5,7 @@ import { Instructor } from '../../beans/instructor';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import {WebsocketService} from "../../services/websocket.service";
 
 @Component({
   selector: 'app-ngbd-modal-content',
@@ -20,7 +21,7 @@ import { environment } from '../../../environments/environment';
     <p>Subject: {{subject}}</p>
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click')" routerLink="/question">Begin</button>
+    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click'); sendQuestionToAll();" >Begin</button>
       <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
@@ -30,6 +31,10 @@ export class NgbdModalContentComponent {
   @Input() difficulty;
   @Input() subject;
   constructor(public activeModal: NgbActiveModal) { }
+
+  sendQuestionToAll(code) {
+    MenuComponent.ws.sendQuestion('anything');
+  }
 }
 
 @Component({
@@ -37,28 +42,31 @@ export class NgbdModalContentComponent {
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
+
 export class MenuComponent implements OnInit {
-  decoded = decodeURIComponent(document.cookie);
-  code = this.decoded.substr('game-code='.length + 1, 4);
-  isPlayer = !this.decoded.includes('instructor=');
   player;
   game: Game = new Game;
+  static ws: WebsocketService;
+  decoded = decodeURIComponent(document.cookie);
+  code = this.decoded.substr('game-code='.length + 1, 4);
+  isPlayer = !this.decoded.indexOf('instructor=');
   if(isPlayer) {
     this.player = decodeURIComponent(document.cookie).substr('game-code=\'xxxx\';user='.length);
   }
-  constructor(private modalService: NgbModal, private client: HttpClient, private router: Router) { }
+  constructor(private modalService: NgbModal, private client: HttpClient, public ws: WebsocketService) { }
 
   ngOnInit() {
+    MenuComponent.ws = this.ws;
+
+    MenuComponent.ws.initializeWebSocketConnection('question');
     console.log(document.cookie);
     this.startGame();
   }
-
 
   startGame() {
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.game = succ;
-        console.log(this.game.code);
 
       },
       (err) => {
