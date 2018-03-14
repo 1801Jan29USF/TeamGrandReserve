@@ -36,6 +36,8 @@ export class UserLoginComponent implements OnInit, OnDestroy {
       (succ: Game) => {
         this.cookie.putObject('game-code', succ.code);
         this.ws.sendPlayer(this.name, this.team);
+        this.cookie.putObject('user', this.name);
+        this.cookie.putObject('team', this.team);
         this.router.navigateByUrl('/pregame');
 
       },
