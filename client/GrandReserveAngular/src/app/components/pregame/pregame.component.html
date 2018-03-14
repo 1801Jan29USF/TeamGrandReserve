@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let player of redTeam.players">
-          <td *ngIf="player.isCaptain">{{player.name}}</td>
+          <td *ngIf="player.captain">{{player.name}}</td>
         </tr>
       </tbody>
     </table>
@@ -21,7 +21,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let player of redTeam.players">
-        <td (click)="setLeader(player)" *ngIf="!player.isCaptain">{{player.name}}</td>
+        <td (click)="setLeader(player)" *ngIf="!player.captain">{{player.name}}</td>
       </tr>
       </tbody>
     </table>
@@ -36,7 +36,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let player of blueTeam.players">
-        <td *ngIf="player.isCaptain">{{player.name}}</td>
+        <td *ngIf="player.captain">{{player.name}}</td>
       </tr>
       </tbody>
     </table>
@@ -48,7 +48,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let player of blueTeam.players">
-        <td (click)="setLeader(player)" *ngIf="!player.isCaptain">{{player.name}}</td>
+        <td (click)="setLeader(player)" *ngIf="!player.captain">{{player.name}}</td>
       </tr>
       </tbody>
     </table>

@@ -6,6 +6,10 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.revature.entities.Player;
+import com.revature.services.GameServiceInterface;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
@@ -19,6 +23,9 @@ public class SocketController {
 			this.template = template;
 		}
 		
+		@Autowired
+		GameServiceInterface gs;
+		
 		@MessageMapping("/send/player")
 		@SendTo("/stomp/player")
 		public String onPlayerAdd(String message) {
@@ -28,9 +35,31 @@ public class SocketController {
 		
 		@MessageMapping("/send/question")
 		@SendTo("/stomp/question")
-		public String onRecievedMessage(String message) {
+		public String toQuestion(String message) {
 			System.out.println("in question");
 			return message;
+		}
+		
+		@MessageMapping("/send/map")
+		@SendTo("/stomp/map")
+		public String toMap(String message) {
+			System.out.println("in map");
+			return message;
+		}
+		
+		@MessageMapping("/send/end")
+		@SendTo("/stomp/end")
+		public String toEnd(String message) {
+			System.out.println("in end");
+			return message;
+		}
+		
+		@MessageMapping("/send/leader")
+		@SendTo("/stomp/leader")
+		@ResponseBody
+		public Player onSetLeader(Player player) {
+			System.out.println("in leader");
+			return gs.setLeader(player);
 		}
 		
 }

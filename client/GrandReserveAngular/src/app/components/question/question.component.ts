@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { WebsocketService } from '../../services/websocket.service';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnDestroy {
 
   question = {
     text: 'MY NAME IS GUY FIERI AND THIS IS DINERS, DRIVE-INS, AND DIVES',
@@ -17,14 +18,19 @@ export class QuestionComponent implements OnInit {
   };
 
   selected;
-  constructor() { }
+  constructor(private ws: WebsocketService) { }
 
   ngOnInit() {
+    this.ws.initializeWebSocketConnection('question');
     this.selected = '-1';
     // loadQuestion()
     if (this.question.text === null) {
 
     }
+  }
+
+  ngOnDestroy() {
+    this.ws.endConnection();
   }
 
   submitAnswer() {

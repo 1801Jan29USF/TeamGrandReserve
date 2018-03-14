@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.entities.Game;
+import com.revature.entities.Player;
 
 public interface GameServiceInterface {
 
@@ -13,5 +14,7 @@ public interface GameServiceInterface {
 	boolean postUpdate(String o);
 
 	boolean selectCell(String code, int team, int cell);
+
+	Player setLeader(Player player);
 
 }

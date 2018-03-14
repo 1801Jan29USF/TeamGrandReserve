@@ -6,7 +6,7 @@ package com.revature.entities;
 public class Player {
     private String name;
     private int points = 0;
-    private boolean isCaptain = false;
+    private boolean captain = false;
 
     public String getName() {
         return name;
@@ -35,10 +35,10 @@ public class Player {
 	}
 
 	public boolean isCaptain() {
-		return isCaptain;
+		return captain;
 	}
 
 	public void setCaptain(boolean isCaptain) {
-		this.isCaptain = isCaptain;
+		this.captain = isCaptain;
 	}
 }
