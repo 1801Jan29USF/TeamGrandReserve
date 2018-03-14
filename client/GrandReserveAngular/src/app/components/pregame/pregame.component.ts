@@ -11,6 +11,7 @@ import { WebsocketService } from '../../services/websocket.service';
 import { AsyncPipe } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-pregame',
@@ -18,25 +19,20 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./pregame.component.css']
 })
 export class PregameComponent implements OnInit, OnDestroy {
-  decoded = decodeURIComponent(document.cookie).split('; ');
   code;
   redTeam: Team = new Team;
   blueTeam: Team = new Team;
   isPlayer;
-  constructor(private client: HttpClient, private router: Router, private ws: WebsocketService) { }
+  constructor(private client: HttpClient, private router: Router, private ws: WebsocketService, private cookie: CookieService) { }
 
   ngOnInit() {
-    this.decoded.forEach((cookie) => {
-      if (cookie.startsWith('game-code')) {
-        this.code = cookie.substr('game-code="'.length);
-        this.code = this.code.slice(0, -1);
-      }
-      if (cookie.startsWith('user')) {
+    console.log('PREGAME COOKIE' + this.cookie.get('user'));
+    this.code = this.cookie.get('game-code').replace(/"/g, '');
+      if (this.cookie.get('user')) {
         this.isPlayer = true;
-      }else if (cookie.startsWith('instructor')) {
+      }else if (this.cookie.get('instructor')) {
         this.isPlayer = false;
       }
-    });
     this.ws.initializeWebSocketConnection('player');
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
@@ -91,25 +87,13 @@ export class PregameComponent implements OnInit, OnDestroy {
   }
 
   updateLeader(player: Player) {
-    console.log(1);
     if (player.points === 0) {
-      console.log(2);
       this.redTeam.players.forEach(function (value) {
-        if (player.name === value.name) {
-          value.captain = true;
-          console.log(3);
-        } else {
-          value.captain = false;
-          console.log(4);
-        }
+        value.captain = player.name === value.name;
       });
     } else if (player.points === 1) {
       this.blueTeam.players.forEach(function (value) {
-        if (player.name === value.name) {
-          value.captain = true;
-        } else {
-          value.captain = false;
-        }
+        value.captain = player.name === value.name;
       });
     }
 
