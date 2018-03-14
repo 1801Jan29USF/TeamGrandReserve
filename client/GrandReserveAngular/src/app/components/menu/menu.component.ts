@@ -5,8 +5,8 @@ import { Instructor } from '../../beans/instructor';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import {WebsocketService} from '../../services/websocket.service';
-import {CookieService} from "angular2-cookie/core";
+import { WebsocketService } from '../../services/websocket.service';
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-ngbd-modal-content',
@@ -50,20 +50,18 @@ export class MenuComponent implements OnInit, OnDestroy {
   player;
   game: Game = new Game;
   code;
-  decoded = decodeURIComponent(document.cookie).split("; ");
+  decoded = decodeURIComponent(document.cookie).split('; ');
   isPlayer;
   constructor(private modalService: NgbModal, private client: HttpClient, public ws: WebsocketService) { }
 
   ngOnInit() {
     this.decoded.forEach((cookie) => {
-      if(cookie.startsWith('user')){
+      if (cookie.startsWith('user')) {
         this.isPlayer = true;
-      }
-      else if(cookie.startsWith('game-code')){
+      } else if (cookie.startsWith('game-code')) {
         this.code = cookie.substr('game-code="'.length);
         this.code = this.code.slice(0, -1);
-      }
-      else if(cookie.startsWith('instructor')){
+      } else if (cookie.startsWith('instructor')) {
         this.isPlayer = false;
       }
     });

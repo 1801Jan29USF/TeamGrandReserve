@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Game} from "../../beans/game";
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {forEach} from "@angular/router/src/utils/collection";
-import {Router} from "@angular/router";
-import {Question} from "../../beans/question";
+import { Game } from '../../beans/game';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { forEach } from '@angular/router/src/utils/collection';
+import { Router } from '@angular/router';
+import { Question } from '../../beans/question';
 
 @Component({
   selector: 'app-question',
@@ -18,7 +18,7 @@ export class QuestionComponent implements OnInit {
   team: number;
   cell: number;
   questionSet: Array<Question>;
-  question : Question;
+  question: Question;
   correct: number;
 
   selected: number;
@@ -29,18 +29,15 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     console.log(this.decoded);
     this.decoded.forEach((cookie) => {
-      if(cookie.startsWith('user')){
+      if (cookie.startsWith('user')) {
         this.user = cookie.substr('user="'.length);
         this.user = this.user.slice(0, -1);
-      }
-      else if(cookie.startsWith('game-code')){
+      }else if (cookie.startsWith('game-code')) {
         this.code = cookie.substr('game-code="'.length);
         this.code = this.code.slice(0, -1);
-      }
-      else if(cookie.startsWith('team')){
+      }else if (cookie.startsWith('team')) {
         this.team = Number(cookie.substr('team="'.length).slice(0, -1));
-      }
-      else if(cookie.startsWith('cell')){
+      }else if (cookie.startsWith('cell')) {
         this.cell = Number(cookie.substr('cell='.length));
       }
     });
@@ -61,18 +58,18 @@ export class QuestionComponent implements OnInit {
     console.log(this.selected);
     if (this.selected == this.question.correct) {
       alert('CORRECT');
-    }else {
+    } else {
       alert('INCORRECT');
     }
-    if(this.questionSet.length === 5){
-      this.router.navigateByUrl("/menu")
+    if (this.questionSet.length === 5) {
+      this.router.navigateByUrl('/menu');
     }
     this.getRandomQuestion();
     this.selected = -1;
   }
 
   getRandomQuestion() {
-    let randIndex = Math.floor((Math.random()*this.questionSet.length));
+    let randIndex = Math.floor((Math.random() * this.questionSet.length));
     this.question = this.questionSet[randIndex];
     this.questionSet.splice(randIndex, 1);
   }

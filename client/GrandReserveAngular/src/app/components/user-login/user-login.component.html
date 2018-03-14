@@ -1,12 +1,12 @@
 <div class="container form-cont" align="center">
-  <form class="form-signin" id="submitGameRegis" (ngSubmit)="submitGameRegis()">
+  <form class="form-signin" id="submitGameRegis" (ngSubmit)="submitGameRegis()" #newRequestForm="ngForm">
     <h2>User Sign in</h2>
     <br>
     <div class="form-row one">
       <label>
         Game Code:
         <br>
-        <input class="text" [(ngModel)]=code name="code">
+        <input class="text" [(ngModel)]=code required name="code">
       </label>
     </div>
     <div class="form-row two">
@@ -15,7 +15,7 @@
           Username:
         </label>
           <br>
-          <input class="text" [(ngModel)]=name name="name">
+          <input class="text" [(ngModel)]=name required name="name">
 
       </div>
       <div class="col">
@@ -23,14 +23,14 @@
           Team:
         </label>
           <br>
-          <select class="custom-select" id="inputGroupSelect01" name="team" [(ngModel)]=team>
+          <select class="custom-select" id="inputGroupSelect01" name="team" required [(ngModel)]=team>
               <option value="0">Red</option>
               <option value="1">Blue</option>
             </select>
       </div>
     </div>
     <div class="container btn-cont">
-      <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Submit</button>
+      <button class="btn btn-lg btn-outline-primary btn-block" type="submit"[disabled]="!newRequestForm.form.valid">Submit</button>
     </div>
   </form>
 </div>

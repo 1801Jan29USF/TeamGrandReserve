@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class InstructorLoginComponent implements OnInit {
   game: Game = new Game;
-  name: string;
+  name: '';
   constructor(private cookie: CookieService, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
