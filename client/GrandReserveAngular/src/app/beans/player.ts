@@ -4,6 +4,7 @@ export class Player {
     isCaptain: boolean;
 
     constructor() {
-
+        this.points = 0;
+        this.isCaptain = false;
     }
 }

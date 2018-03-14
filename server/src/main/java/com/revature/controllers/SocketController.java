@@ -20,16 +20,16 @@ public class SocketController {
 		}
 		
 		@MessageMapping("/send/player")
-		@SendTo("/player")
+		@SendTo("/stomp/player")
 		public String onPlayerAdd(String message) {
-			System.out.println("here");
+			System.out.println("in player");
 			return message;
 		}
 		
 		@MessageMapping("/send/question")
-		@SendTo("/question")
+		@SendTo("/stomp/question")
 		public String onRecievedMessage(String message) {
-			System.out.println("here");
+			System.out.println("in question");
 			return message;
 		}
 		

@@ -5,7 +5,7 @@ import { Instructor } from '../../beans/instructor';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import {WebsocketService} from "../../services/websocket.service";
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-ngbd-modal-content',
@@ -44,9 +44,9 @@ export class NgbdModalContentComponent {
 })
 
 export class MenuComponent implements OnInit {
+  static ws: WebsocketService;
   player;
   game: Game = new Game;
-  static ws: WebsocketService;
   decoded = decodeURIComponent(document.cookie);
   code = this.decoded.substr('game-code='.length + 1, 4);
   isPlayer = !this.decoded.indexOf('instructor=');

@@ -3,20 +3,22 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import Stomp from 'stompjs';
 import { StompService } from 'ng2-stomp-service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import { Team } from '../beans/team';
+import { Subject } from 'rxjs/Subject';
+import { Player } from '../beans/player';
 
 
 @Injectable()
 export class WebsocketService {
 
-
+  public static teams: Array<Subject<Player>> = new Array(2);
+  private static subscription: any = new Subject;
   private wsConf: any = {
     host: 'http://localhost:8080/server/socket'
   };
-  private subscription: any;
   constructor(public stomp: StompService, private router: Router) {
   }
-  private data: any;
 
   initializeWebSocketConnection(channel: string) {
 
@@ -24,24 +26,34 @@ export class WebsocketService {
 
     this.stomp.startConnect().then(() => {
       console.log('connected');
-      this.subscription = this.stomp.subscribe(`/question`, this.routeToQuestion);
+      switch (channel) {
+        case('question'):
+          WebsocketService.subscription = this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
+          break;
+        case('player'):
+          WebsocketService.subscription = this.stomp.subscribe(`/stomp/player`, this.getTeams);
+          break;
+      }
     });
 
   }
 
 
-  sendPLayer(player) {
-    this.stomp.send('/app/send/player', {'player': player});
+  sendPlayer(player, team) {
+    this.stomp.send('/app/send/player', {'player': player, 'team': team});
   }
 
   sendQuestion(code) {
     this.stomp.send('/app/send/question', {'code': code});
   }
 
-  public response = (data) => {
-    console.log(data);
-    this.data = data;
+
+  public getTeams = (data, i) => {
+    const tmp = new Player;
+    tmp.name = data.player;
+    WebsocketService.teams[data.team].next(tmp);
   }
+
   public routeToQuestion = (data) => {
     console.log(data);
     this.router.navigateByUrl('/question');
