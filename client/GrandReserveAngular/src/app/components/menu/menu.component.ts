@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import {WebsocketService} from '../../services/websocket.service';
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-ngbd-modal-content',
@@ -21,7 +22,7 @@ import {WebsocketService} from '../../services/websocket.service';
     <p>Subject: {{subject}}</p>
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click'); sendQuestionToAll();" >Begin</button>
+    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click'); sendQuestionToAll();this.cookie.putObject('cell', cellId)" >Begin</button>
       <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
@@ -30,7 +31,8 @@ import {WebsocketService} from '../../services/websocket.service';
 export class NgbdModalContentComponent {
   @Input() difficulty;
   @Input() subject;
-  constructor(public activeModal: NgbActiveModal) { }
+  @Input() cellId;
+  constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
   sendQuestionToAll(code) {
     MenuComponent.ws.sendQuestion('anything');
@@ -47,20 +49,30 @@ export class MenuComponent implements OnInit, OnDestroy {
   static ws: WebsocketService;
   player;
   game: Game = new Game;
-  decoded = decodeURIComponent(document.cookie);
-  code = this.decoded.substr('game-code='.length + 1, 4);
-  isPlayer = !this.decoded.indexOf('instructor=');
-  if(isPlayer) {
-    this.player = decodeURIComponent(document.cookie).substr('game-code=\'xxxx\';user='.length);
-  }
+  code;
+  decoded = decodeURIComponent(document.cookie).split("; ");
+  isPlayer;
   constructor(private modalService: NgbModal, private client: HttpClient, public ws: WebsocketService) { }
 
   ngOnInit() {
+    this.decoded.forEach((cookie) => {
+      if(cookie.startsWith('user')){
+        this.isPlayer = true;
+      }
+      else if(cookie.startsWith('game-code')){
+        this.code = cookie.substr('game-code="'.length);
+        this.code = this.code.slice(0, -1);
+      }
+      else if(cookie.startsWith('instructor')){
+        this.isPlayer = false;
+      }
+    });
     MenuComponent.ws = this.ws;
 
     MenuComponent.ws.initializeWebSocketConnection('question');
     console.log(document.cookie);
     this.startGame();
+    console.log(this.isPlayer);
   }
 
   ngOnDestroy() {
@@ -71,7 +83,6 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.game = succ;
-
       },
       (err) => {
         console.log('failed');
@@ -84,6 +95,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(NgbdModalContentComponent);
     modalRef.componentInstance.difficulty = this.game.map[i].difficulty;
     modalRef.componentInstance.subject = this.game.map[i].subject;
+    modalRef.componentInstance.cellId = i;
   }
 
 }

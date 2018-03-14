@@ -58,6 +58,6 @@
     <br>
     <label id="code">{{code}}</label>
     <br>
-    <button class="btn btn-primary" (click)="startGame()">Start Game!</button>
+    <button class="btn btn-primary" *ngIf="!isPlayer" (click)="startGame()">Start Game!</button>
   </div>
 </div>
