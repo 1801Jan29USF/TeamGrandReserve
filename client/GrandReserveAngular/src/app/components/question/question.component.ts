@@ -1,32 +1,57 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
+import { Game } from '../../beans/game';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { forEach } from '@angular/router/src/utils/collection';
+import { Router } from '@angular/router';
+import { Question } from '../../beans/question';
+
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
+
 export class QuestionComponent implements OnInit, OnDestroy {
+  decoded = decodeURIComponent(document.cookie).split('; ');
+  code: string;
+  user: string;
+  team: number;
+  cell: number;
+  questionSet: Array<Question>;
+  question: Question;
+  correct: number;
+  selected: number;
 
-  question = {
-    text: 'MY NAME IS GUY FIERI AND THIS IS DINERS, DRIVE-INS, AND DIVES',
-    option1: 'pls leave me alone guy fieri',
-    option2: 'praise be to the frosted tips',
-    option3: 'nah',
-    option4: 'this option is incredibly long in order to see exactly what having an incredibly long option in this incredibly long question is going to be like kthxbai',
-    correct: '2',
-  };
-
-  selected;
-  constructor(private ws: WebsocketService) { }
+  constructor(private ws: WebsocketService, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.ws.initializeWebSocketConnection('question');
-    this.selected = '-1';
-    // loadQuestion()
-    if (this.question.text === null) {
-
-    }
+    console.log(this.decoded);
+    this.decoded.forEach((cookie) => {
+      if (cookie.startsWith('user')) {
+        this.user = cookie.substr('user="'.length);
+        this.user = this.user.slice(0, -1);
+      }else if (cookie.startsWith('game-code')) {
+        this.code = cookie.substr('game-code="'.length);
+        this.code = this.code.slice(0, -1);
+      }else if (cookie.startsWith('team')) {
+        this.team = Number(cookie.substr('team="'.length).slice(0, -1));
+      }else if (cookie.startsWith('cell')) {
+        this.cell = Number(cookie.substr('cell='.length));
+      }
+    });
+    this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
+      (succ: Game) => {
+        this.questionSet = succ.map[this.cell].questionSet;
+        console.log(this.questionSet);
+        this.getRandomQuestion();
+      },
+      (err) => {
+        console.log('failed');
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -34,12 +59,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   submitAnswer() {
-    if (this.selected === this.question.correct) {
+    console.log(this.question.correct);
+    console.log(this.selected);
+    if (this.selected == this.question.correct) {
       alert('CORRECT');
-      this.ngOnInit();
-    }else {
+    } else {
       alert('INCORRECT');
-      this.ngOnInit();
     }
+    if (this.questionSet.length === 5) {
+      this.router.navigateByUrl('/menu');
+    }
+    this.getRandomQuestion();
+    this.selected = -1;
+  }
+
+  getRandomQuestion() {
+    let randIndex = Math.floor((Math.random() * this.questionSet.length));
+    this.question = this.questionSet[randIndex];
+    this.questionSet.splice(randIndex, 1);
   }
 }

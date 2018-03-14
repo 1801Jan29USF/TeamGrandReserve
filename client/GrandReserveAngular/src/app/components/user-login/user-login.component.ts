@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Game} from '../../beans/game';
-import {environment} from '../../../environments/environment';
-import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Game } from '../../beans/game';
+import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { WebsocketService } from '../../services/websocket.service';
 import { AppComponent } from '../../app.component';
@@ -14,9 +14,9 @@ import { AppComponent } from '../../app.component';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit, OnDestroy {
-  code;
-  name;
-  team;
+  code: '';
+  name: '';
+  team: null;
 
   constructor(private client: HttpClient, private router: Router,
     private cookie: CookieService, private ws: WebsocketService) { }
@@ -36,6 +36,8 @@ export class UserLoginComponent implements OnInit, OnDestroy {
       (succ: Game) => {
         this.cookie.putObject('game-code', succ.code);
         this.ws.sendPlayer(this.name, this.team);
+        this.cookie.putObject('user', this.name);
+        this.cookie.putObject('team', this.team);
         this.router.navigateByUrl('/pregame');
 
       },
