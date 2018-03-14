@@ -22,6 +22,7 @@ import { StompService } from 'ng2-stomp-service';
 import { GameOverComponent } from './components/game-over/game-over.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { InstructorLoginComponent } from './components/instructor-login/instructor-login.component';
+import {OnTeamGuard} from "./guards/onTeamGuard/on-team.guard";
 
 
 
@@ -49,7 +50,8 @@ import { InstructorLoginComponent } from './components/instructor-login/instruct
   providers: [
     WebsocketService,
     StompService,
-    CookieService
+    CookieService,
+    OnTeamGuard
   ],
   entryComponents: [
     NgbdModalContentComponent
