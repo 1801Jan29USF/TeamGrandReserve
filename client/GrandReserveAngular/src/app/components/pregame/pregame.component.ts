@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './pregame.component.html',
   styleUrls: ['./pregame.component.css']
 })
-export class PregameComponent implements OnInit {
+export class PregameComponent implements OnInit, OnDestroy {
   decoded: string = decodeURIComponent(document.cookie);
   code = this.decoded.substr(this.decoded.indexOf('game-code="') + 'game-code="'.length, 4);
   redTeam: Team = new Team;
@@ -37,7 +37,7 @@ export class PregameComponent implements OnInit {
             this.redTeam.players.push(player);
          });
          WebsocketService.teams[1].subscribe((player: Player) => {
-          this.redTeam.players.push(player);
+          this.blueTeam.players.push(player);
          });
 
       },
@@ -45,6 +45,10 @@ export class PregameComponent implements OnInit {
         console.log('failed');
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.ws.endConnection();
   }
 
   setLeader(player: Player) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Game } from '../../beans/game';
 import { Instructor } from '../../beans/instructor';
@@ -43,7 +43,7 @@ export class NgbdModalContentComponent {
   styleUrls: ['./menu.component.css']
 })
 
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   static ws: WebsocketService;
   player;
   game: Game = new Game;
@@ -61,6 +61,10 @@ export class MenuComponent implements OnInit {
     MenuComponent.ws.initializeWebSocketConnection('question');
     console.log(document.cookie);
     this.startGame();
+  }
+
+  ngOnDestroy() {
+    this.ws.endConnection();
   }
 
   startGame() {

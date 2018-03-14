@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Game} from '../../beans/game';
 import {environment} from '../../../environments/environment';
@@ -13,7 +13,7 @@ import { AppComponent } from '../../app.component';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit, OnDestroy {
   code;
   name;
   team;
@@ -23,6 +23,10 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit() {
     this.ws.initializeWebSocketConnection('player');
+  }
+
+  ngOnDestroy() {
+    this.ws.endConnection();
   }
 
   submitGameRegis() {

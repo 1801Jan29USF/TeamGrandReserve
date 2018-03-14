@@ -13,7 +13,7 @@ import { Player } from '../beans/player';
 export class WebsocketService {
 
   public static teams: Array<Subject<Player>> = new Array(2);
-  private static subscription: any = new Subject;
+  private subscription: any = new Subject;
   private wsConf: any = {
     host: 'http://localhost:8080/server/socket'
   };
@@ -28,14 +28,20 @@ export class WebsocketService {
       console.log('connected');
       switch (channel) {
         case('question'):
-          WebsocketService.subscription = this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
+          this.subscription = this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
           break;
         case('player'):
-          WebsocketService.subscription = this.stomp.subscribe(`/stomp/player`, this.getTeams);
+          this.subscription = this.stomp.subscribe(`/stomp/player`, this.getTeams);
           break;
       }
     });
 
+  }
+
+  endConnection() {
+    this.stomp.disconnect().then(() => {
+      console.log('Connection closed');
+    });
   }
 
 
