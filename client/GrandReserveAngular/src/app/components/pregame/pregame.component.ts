@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./pregame.component.css']
 })
 export class PregameComponent implements OnInit, OnDestroy {
-  decoded = decodeURIComponent(document.cookie).split("; ");
+  decoded = decodeURIComponent(document.cookie).split('; ');
   code;
   redTeam: Team = new Team;
   blueTeam: Team = new Team;
@@ -26,31 +26,30 @@ export class PregameComponent implements OnInit, OnDestroy {
   constructor(private client: HttpClient, private router: Router, private ws: WebsocketService) { }
 
   ngOnInit() {
-    this.decoded.forEach((cookie) =>{
-      if(cookie.startsWith('game-code')){
+    this.decoded.forEach((cookie) => {
+      if (cookie.startsWith('game-code')) {
         this.code = cookie.substr('game-code="'.length);
         this.code = this.code.slice(0, -1);
       }
-      if(cookie.startsWith('user')){
+      if (cookie.startsWith('user')) {
         this.isPlayer = true;
-      }
-      else if(cookie.startsWith('instructor')){
+      }else if (cookie.startsWith('instructor')) {
         this.isPlayer = false;
       }
     });
     this.ws.initializeWebSocketConnection('player');
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
-         console.log(succ);
-         this.code = succ.code.toUpperCase();
-         this.redTeam = succ.teams[0];
-         this.blueTeam = succ.teams[1];
-         WebsocketService.teams[0].subscribe((player: Player) => {
-            this.redTeam.players.push(player);
-         });
-         WebsocketService.teams[1].subscribe((player: Player) => {
+        console.log(succ);
+        this.code = succ.code.toUpperCase();
+        this.redTeam = succ.teams[0];
+        this.blueTeam = succ.teams[1];
+        WebsocketService.teams[0].subscribe((player: Player) => {
+          this.redTeam.players.push(player);
+        });
+        WebsocketService.teams[1].subscribe((player: Player) => {
           this.blueTeam.players.push(player);
-         });
+        });
 
       },
       (err) => {
