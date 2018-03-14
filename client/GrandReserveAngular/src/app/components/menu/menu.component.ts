@@ -88,6 +88,10 @@ export class MenuComponent implements OnInit, OnDestroy {
     );
   }
 
+  endGame() {
+    this.ws.sendToEnd();
+  }
+
 
   open(i) {
     const modalRef = this.modalService.open(NgbdModalContentComponent);

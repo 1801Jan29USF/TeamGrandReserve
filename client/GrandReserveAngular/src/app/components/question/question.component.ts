@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { WebsocketService } from '../../services/websocket.service';
 import { Game } from '../../beans/game';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -6,12 +7,14 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { Router } from '@angular/router';
 import { Question } from '../../beans/question';
 
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent implements OnInit {
+
+export class QuestionComponent implements OnInit, OnDestroy {
   decoded = decodeURIComponent(document.cookie).split('; ');
   code: string;
   user: string;
@@ -20,11 +23,9 @@ export class QuestionComponent implements OnInit {
   questionSet: Array<Question>;
   question: Question;
   correct: number;
-
   selected: number;
-  constructor(private client: HttpClient, private router: Router) { }
 
-
+  constructor(private ws: WebsocketService, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
     console.log(this.decoded);
@@ -51,6 +52,10 @@ export class QuestionComponent implements OnInit {
         console.log('failed');
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.ws.endConnection();
   }
 
   submitAnswer() {

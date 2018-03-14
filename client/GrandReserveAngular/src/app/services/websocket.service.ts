@@ -3,7 +3,7 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import Stomp from 'stompjs';
 import { StompService } from 'ng2-stomp-service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { Team } from '../beans/team';
 import { Subject } from 'rxjs/Subject';
 import { Player } from '../beans/player';
@@ -14,6 +14,7 @@ export class WebsocketService {
 
   public static teams: Array<Subject<Player>> = new Array(2);
   private subscription: any = new Subject;
+  public leaderSubject: any = new Subject;
   private wsConf: any = {
     host: 'http://localhost:8080/server/socket'
   };
@@ -27,11 +28,15 @@ export class WebsocketService {
     this.stomp.startConnect().then(() => {
       console.log('connected');
       switch (channel) {
-        case('question'):
-          this.subscription = this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
+        case ('question'):
+          this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
+          this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
+          this.stomp.subscribe(`/stomp/map`, this.routeToMap);
           break;
-        case('player'):
-          this.subscription = this.stomp.subscribe(`/stomp/player`, this.getTeams);
+        case ('player'):
+          this.stomp.subscribe(`/stomp/player`, this.getTeams);
+          this.stomp.subscribe(`/stomp/leader`, this.getLeader);
+          this.stomp.subscribe(`/stomp/map`, this.routeToMap);
           break;
       }
     });
@@ -46,23 +51,52 @@ export class WebsocketService {
 
 
   sendPlayer(player, team) {
-    this.stomp.send('/app/send/player', {'player': player, 'team': team});
+    this.stomp.send('/app/send/player', { 'player': player, 'team': team });
+  }
+
+  sendLeader(player: Player) {
+    this.stomp.send('/app/send/leader', player);
   }
 
   sendQuestion(code) {
-    this.stomp.send('/app/send/question', {'code': code});
+    this.stomp.send('/app/send/question', { 'code': code });
   }
 
+  sendToMap() {
+    this.stomp.send('/app/send/map', {});
+  }
 
-  public getTeams = (data, i) => {
-    const tmp = new Player;
-    tmp.name = data.player;
-    WebsocketService.teams[data.team].next(tmp);
+  sendToEnd() {
+    this.stomp.send('/app/send/end', {});
+  }
+
+  public getLeader = (data) => {
+      // const tmp: Player = new Player;
+      // tmp.points = data.points;
+      // tmp.name = data.name;
+      // tmp.captain = data.captain;
+      this.leaderSubject.next(data);
+    }
+
+  public getTeams = (data) => {
+      const tmp = new Player;
+      tmp.name = data.player;
+      WebsocketService.teams[data.team].next(tmp);
   }
 
   public routeToQuestion = (data) => {
     console.log(data);
     this.router.navigateByUrl('/question');
+  }
+
+  public routeToMap = (data) => {
+    console.log(data);
+    this.router.navigateByUrl('/menu');
+  }
+
+  public routeToEnd = (data) => {
+    console.log(data);
+    this.router.navigateByUrl('/game-over');
   }
 
 }

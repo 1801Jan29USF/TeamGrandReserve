@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.BeansException;
@@ -81,6 +82,23 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 		Game g = findGame(code);
 		g.getTeams().get(team).setCurrentlySelected(cell);	
 		return true;		
+	}
+	
+	public Player setLeader(Player player) {
+		Player p = new Player();
+		for(int i = 0; i < GameService.gm.get(0).getTeams().size(); i++) {
+			for(int j = 0; j < GameService.gm.get(0).getTeams().get(i).getPlayers().size(); j++) {
+				if( GameService.gm.get(0).getTeams().get(i).getPlayers().get(j).getName().equals(player.getName())) {
+					GameService.gm.get(0).getTeams().get(i).getPlayers().get(j).setCaptain(true);
+					GameService.gm.get(0).getTeams().get(i).setTeamLeader(j);
+					p = GameService.gm.get(0).getTeams().get(i).getPlayers().get(j);
+					p.setPoints(i);
+				} else {
+					GameService.gm.get(0).getTeams().get(i).getPlayers().get(j).setCaptain(false);
+				}
+			}
+		}
+		return p;
 	}
 
 	@Override

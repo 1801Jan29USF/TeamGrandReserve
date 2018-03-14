@@ -50,7 +50,9 @@ export class PregameComponent implements OnInit, OnDestroy {
         WebsocketService.teams[1].subscribe((player: Player) => {
           this.blueTeam.players.push(player);
         });
-
+        this.ws.leaderSubject.subscribe((player: Player) => {
+          this.updateLeader(player);
+        });
       },
       (err) => {
         console.log('failed');
@@ -59,27 +61,28 @@ export class PregameComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ws.endConnection();
+     this.ws.endConnection();
   }
 
   setLeader(player: Player) {
     // TODO: this doesn't work when you get to game screen, need db calls here to keep changes
-    if (!player.isCaptain) {
+    if (!player.captain) {
       if (this.redTeam.players.includes(player)) {
         this.redTeam.players.forEach(function (value) {
-          if (value.isCaptain) {
-            value.isCaptain = false;
+          if (value.captain) {
+            value.captain = false;
 
           }
         });
       } else if (this.blueTeam.players.includes(player)) {
         this.blueTeam.players.forEach(function (value) {
-          if (value.isCaptain) {
-            value.isCaptain = false;
+          if (value.captain) {
+            value.captain = false;
           }
         });
       }
-      player.isCaptain = true;
+      player.captain = true;
+      this.ws.sendLeader(player);
       console.log('This player is now the leader');
     } else {
       console.log('This player is already the leader.');
@@ -87,8 +90,32 @@ export class PregameComponent implements OnInit, OnDestroy {
 
   }
 
+  updateLeader(player: Player) {
+    console.log(1);
+    if (player.points === 0) {
+      console.log(2);
+      this.redTeam.players.forEach(function (value) {
+        if (player.name === value.name) {
+          value.captain = true;
+          console.log(3);
+        } else {
+          value.captain = false;
+          console.log(4);
+        }
+      });
+    } else if (player.points === 1) {
+      this.blueTeam.players.forEach(function (value) {
+        if (player.name === value.name) {
+          value.captain = true;
+        } else {
+          value.captain = false;
+        }
+      });
+    }
+
+  }
   startGame() {
-    this.router.navigateByUrl('/menu');
+    this.ws.sendToMap();
   }
 
 }
