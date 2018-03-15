@@ -22,7 +22,12 @@ import { CookieService } from 'angular2-cookie/core';
     <p>Subject: {{subject}}</p>
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click'); sendQuestionToAll();this.cookie.putObject('cell', cellId)" >Begin</button>
+    <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click');
+        sendQuestionToAll();
+        this.cookie.putObject('cell', cellId);
+        this.cookie.putObject('answering-team', answeringTeam)">
+      Begin
+    </button>
       <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
@@ -32,10 +37,11 @@ export class NgbdModalContentComponent {
   @Input() difficulty;
   @Input() subject;
   @Input() cellId;
+  @Input() answeringTeam;
   constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
-  sendQuestionToAll(code) {
-    MenuComponent.ws.sendQuestion('anything');
+  sendQuestionToAll() {
+    MenuComponent.ws.sendQuestion(this.answeringTeam);
   }
 }
 
@@ -52,16 +58,18 @@ export class MenuComponent implements OnInit, OnDestroy {
   code;
   decoded = decodeURIComponent(document.cookie).split('; ');
   isPlayer;
-  constructor(private modalService: NgbModal, private client: HttpClient, public ws: WebsocketService) { }
+  team;
+  constructor(private modalService: NgbModal, private client: HttpClient, public ws: WebsocketService, private cookie: CookieService) { }
 
   ngOnInit() {
-    this.decoded.forEach((cookie) => {
-      if (cookie.startsWith('user')) {
+    console.log('MENU COOKIE' + this.cookie.get('user'));
+    this.code = this.cookie.get('game-code').replace(/"/g, '');
+    this.team = this.cookie.get('team').replace(/"/g, '');
+    console.log(this.team);
+    this.decoded.forEach(() => {
+      if (this.cookie.get('user')) {
         this.isPlayer = true;
-      } else if (cookie.startsWith('game-code')) {
-        this.code = cookie.substr('game-code="'.length);
-        this.code = this.code.slice(0, -1);
-      } else if (cookie.startsWith('instructor')) {
+      } else if (this.cookie.get('instructor')) {
         this.isPlayer = false;
       }
     });
@@ -98,6 +106,18 @@ export class MenuComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.difficulty = this.game.map[i].difficulty;
     modalRef.componentInstance.subject = this.game.map[i].subject;
     modalRef.componentInstance.cellId = i;
+    modalRef.componentInstance.answeringTeam = this.team;
+  }
+
+  addClass(i) {
+    console.log(this.cookie.get('team'));
+    if (this.cookie.get('team') == '"0"') {
+      document.getElementsByClassName('col')[i].classList.add('red');
+    } else if (this.cookie.get('team') == '"1"') {
+      document.getElementsByClassName('col')[i].classList.add('blue');
+    }
+
+    document.getElementsByClassName('col')[i].classList.remove('white');
   }
 
 }

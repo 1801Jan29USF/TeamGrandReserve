@@ -14,9 +14,9 @@ import { AppComponent } from '../../app.component';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit, OnDestroy {
-  code: '';
-  name: '';
-  team: null;
+  code = '';
+  name = '';
+  team;
 
   constructor(private client: HttpClient, private router: Router,
     private cookie: CookieService, private ws: WebsocketService) { }
@@ -35,9 +35,9 @@ export class UserLoginComponent implements OnInit, OnDestroy {
     this.client.get(`${environment.context}game/add-player/`.concat(url)).subscribe(
       (succ: Game) => {
         this.cookie.putObject('game-code', succ.code);
-        this.ws.sendPlayer(this.name, this.team);
         this.cookie.putObject('user', this.name);
         this.cookie.putObject('team', this.team);
+        this.ws.sendPlayer(this.name, this.team);
         this.router.navigateByUrl('/pregame');
 
       },

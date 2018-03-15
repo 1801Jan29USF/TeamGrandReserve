@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Router } from '@angular/router';
 import { Question } from '../../beans/question';
+import {CookieService} from "angular2-cookie/core";
 
 
 @Component({
@@ -15,7 +16,6 @@ import { Question } from '../../beans/question';
 })
 
 export class QuestionComponent implements OnInit, OnDestroy {
-  decoded = decodeURIComponent(document.cookie).split('; ');
   code: string;
   user: string;
   team: number;
@@ -25,23 +25,13 @@ export class QuestionComponent implements OnInit, OnDestroy {
   correct: number;
   selected: number;
 
-  constructor(private ws: WebsocketService, private client: HttpClient, private router: Router) { }
+  constructor(private ws: WebsocketService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
 
   ngOnInit() {
-    console.log(this.decoded);
-    this.decoded.forEach((cookie) => {
-      if (cookie.startsWith('user')) {
-        this.user = cookie.substr('user="'.length);
-        this.user = this.user.slice(0, -1);
-      }else if (cookie.startsWith('game-code')) {
-        this.code = cookie.substr('game-code="'.length);
-        this.code = this.code.slice(0, -1);
-      }else if (cookie.startsWith('team')) {
-        this.team = Number(cookie.substr('team="'.length).slice(0, -1));
-      }else if (cookie.startsWith('cell')) {
-        this.cell = Number(cookie.substr('cell='.length));
-      }
-    });
+    this.code = this.cookie.get('game-code').replace(/"/g, '');
+    this.user = this.cookie.get('user').replace(/"/g, '');
+    this.team = Number(this.cookie.get('team'));
+    this.cell = Number(this.cookie.get('cell'));
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.questionSet = succ.map[this.cell].questionSet;
