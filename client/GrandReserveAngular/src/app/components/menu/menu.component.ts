@@ -109,4 +109,15 @@ export class MenuComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.answeringTeam = this.team;
   }
 
+  addClass(i) {
+    console.log(this.cookie.get('team'));
+    if (this.cookie.get('team') == '"0"') {
+      document.getElementsByClassName('col')[i].classList.add('red');
+    } else if (this.cookie.get('team') == '"1"') {
+      document.getElementsByClassName('col')[i].classList.add('blue');
+    }
+
+    document.getElementsByClassName('col')[i].classList.remove('white');
+  }
+
 }

@@ -4,22 +4,21 @@
     height:6em;
     
 }
-.col:hover{
+.white:hover{
     transform: scale(.9);
 }
 
-.col-red{
+.red{
     background-color:red;
 }
 
-.col-blue{
+.blue{
     background-color:blue;
     
 }
 
 aside h1{
     padding: 2px;
-    font-family: 'Press Start 2P', cursive;
     font-size: calc(12px + 6 * ((100vw - 320px) / 680));
 }
 
@@ -44,6 +43,7 @@ aside h1{
     -webkit-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+    
 }
 .sidebar2{
     word-wrap:break-word;
@@ -59,7 +59,18 @@ aside h1{
     -moz-box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
 }
+@media only screen and (max-width: 450px) {
 
+    .sidebar {
+        visibility: hidden;
+    }
+    .sidebar2 {
+        visibility: hidden;
+    }
+    .container{
+        min-width: 450px;
+    }
+}
 .container-fluid{
     width:100%;
     display:flex;
