@@ -41,8 +41,9 @@ public class GameController {
 		return gs.addPlayer(code, team, name);
 	}
 	
-	@GetMapping("select-cell/{code}/{team}/{cell}")
-	public boolean selectCell(@PathVariable String code, @PathVariable int team, @PathVariable int cell) {
-		return gs.selectCell(code, team, cell);		
+	@GetMapping("update-cell/{code}/{team}/{name}/{cell}/{result}")
+	public boolean updateCell(@PathVariable String code, @PathVariable int team, @PathVariable String name,
+			@PathVariable int cell, @PathVariable int result) {
+		return gs.updateCell(code, team, name, cell, result);		
 	}
 }

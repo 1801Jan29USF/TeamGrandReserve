@@ -1,20 +1,21 @@
 package com.revature.services;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.controllers.GameController;
 import com.revature.entities.Game;
 import com.revature.entities.Player;
+import com.revature.entities.Team;
 import com.revature.entities.dbobjects.Instructor;
 
 @Service 
@@ -78,10 +79,45 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 		return g;		
 	}
 	
-	public boolean selectCell(String code, int team, int cell) {
+	public boolean updateCell(String code, int team, String name, int cell, int result) {
 		Game g = findGame(code);
-		g.getTeams().get(team).setCurrentlySelected(cell);	
-		return true;		
+		Team t = g.getTeams().get(team);
+		Player p;
+		//find player and award points
+		for(int j = 0; j < t.getPlayers().size(); j++) {
+			if (t.getPlayers().get(j).getName().equals(name)) {
+				p = t.getPlayers().get(j);
+				p.setPoints(p.getPoints() + result);
+				t.getScoreTumbler().add(result);
+			}
+		}
+		//check team score if last member
+		boolean flag = false;
+		if (t.getScoreTumbler().size() == t.getPlayers().size()) {
+			int acc = 0;
+			for (int num : t.getScoreTumbler()) {
+				acc += num;
+			}
+			if ( acc > t.getPlayers().size() * 5 / .7) {
+				flag = true;
+				if ( team == 0) {
+					g.getMap().get(cell).setColor("red");
+				} else {
+					g.getMap().get(cell).setColor("blue");
+				}
+			}
+		}
+		//wait for all done
+		ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+	    javax.servlet.http.HttpServletRequest req = sra.getRequest(); //might be wrong
+		while (t.getScoreTumbler().size() < t.getPlayers().size()) {
+			try {
+				req.wait(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return flag;		
 	}
 	
 	public Player setLeader(Player player) {

@@ -2,6 +2,7 @@ package com.revature.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Functionality:
@@ -11,6 +12,7 @@ public class Team {
     private int teamLeader;
     private int points;
     private int currentlySelected;
+    private List<Integer> scoreTumbler = new Vector<>();
 
     public List<Player> getPlayers() {
         return players;
@@ -52,5 +54,13 @@ public class Team {
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+
+	public List<Integer> getScoreTumbler() {
+		return scoreTumbler;
+	}
+
+	public void setScoreTumbler(List<Integer> scoreTumbler) {
+		this.scoreTumbler = scoreTumbler;
 	}
 }

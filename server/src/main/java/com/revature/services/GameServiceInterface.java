@@ -13,8 +13,8 @@ public interface GameServiceInterface {
 
 	boolean postUpdate(String o);
 
-	boolean selectCell(String code, int team, int cell);
-
 	Player setLeader(Player player);
+
+	boolean updateCell(String code, int team, String name, int cell, int result);
 
 }
