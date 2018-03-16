@@ -106,16 +106,7 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 					g.getMap().get(cell).setColor("blue");
 				}
 			}
-		}
-		//wait for all done
-		ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
-	    javax.servlet.http.HttpServletRequest req = sra.getRequest(); //might be wrong
-		while (t.getScoreTumbler().size() < t.getPlayers().size()) {
-			try {
-				req.wait(200);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			t.getScoreTumbler().clear();
 		}
 		return flag;		
 	}

@@ -62,4 +62,16 @@ public class SocketController {
 			return gs.setLeader(player);
 		}
 		
+		@SendTo("/stomp/waiting-red")
+		public int toMapTeam0() {
+			System.out.println("in red");
+			return 0;
+		}
+		
+		@SendTo("/stomp/waiting-blue")
+		public int toMapTeam1() {
+			System.out.println("in blue");
+			return 1;
+		}
+		
 }
