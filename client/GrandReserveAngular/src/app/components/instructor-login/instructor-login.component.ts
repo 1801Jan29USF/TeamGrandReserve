@@ -31,4 +31,11 @@ export class InstructorLoginComponent implements OnInit {
       }
     );
   }
+  show() {
+    document.getElementById('alert').style.opacity = '1';
+    document.getElementById('alert').style.animation = 'fadeIn 2s';
+    document.getElementsByClassName('loading')[0].classList.add('loading1');
+    document.getElementsByClassName('loading')[0].classList.remove('loading');
+
+  }
 }

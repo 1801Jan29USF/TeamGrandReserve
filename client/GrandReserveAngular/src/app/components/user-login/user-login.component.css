@@ -20,8 +20,13 @@ h2{
 }
 
 .btn-cont{
-  margin-top: 1em;
-  padding-left: 30%;
-  padding-right: 30%;
+  margin-top: 1.5em;
   margin-bottom: 1em;
+}
+
+.btn{
+  font-size: calc(18px + 6 * ((100vw - 320px) / 680));
+  -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+  box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
 }

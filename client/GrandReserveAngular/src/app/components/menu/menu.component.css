@@ -59,16 +59,18 @@ aside h1{
     -moz-box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: -4px 0px 5px 0px rgba(0,0,0,0.75);
 }
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 650px) {
 
     .sidebar {
-        visibility: hidden;
+        animation: fadeOutLeft 1s;
+        opacity: 0;
     }
     .sidebar2 {
-        visibility: hidden;
+        animation: fadeOutRight 1s;
+        opacity: 0;
     }
     .container{
-        min-width: 450px;
+        width: 100%;
     }
 }
 .container-fluid{
@@ -88,3 +90,52 @@ aside h1{
      text-align: left;
      color:whitesmoke;
  }
+
+ @-webkit-keyframes fadeOutLeft {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  
+  @keyframes fadeOutLeft {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  @-webkit-keyframes fadeOutRight {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  
+  @keyframes fadeOutRight {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  

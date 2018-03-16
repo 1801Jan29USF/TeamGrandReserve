@@ -15,6 +15,7 @@
   }
 
   h2{
+    font-size: calc(26px + 6 * ((100vw - 320px) / 680));
     text-shadow: 1px 1px #3527fe,
     2px 2px lightpink,
     3px 3px red; 
@@ -27,4 +28,41 @@
     margin-bottom: 1em;
     text-align: center;
   }
-  
+  .btn{
+    font-size: calc(18px + 6 * ((100vw - 320px) / 680));
+    -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+  }
+  #alert{
+    
+    opacity: 0;
+  }
+  .loading{
+    display:none;
+  }
+  .loading1{
+    width:8em;
+    height:6em;
+    animation: fadeIn 2s;
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }

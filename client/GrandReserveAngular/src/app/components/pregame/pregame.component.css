@@ -1,12 +1,9 @@
 .container{
   margin-top: 6%;
-  width:40vw;
-
+  width:50%;
   order:1;
   margin-bottom: 6%;
   text-align: center;
-  
-
 }
 
 .table{
@@ -23,11 +20,11 @@ th {
 }
 
 #code{
-  font-size: 15vw;
+  font-size: calc(100px + 6 * ((100vw - 320px) / 680));
 }
 
 #code_label{
-  font-size: 32pt;
+  font-size: calc(40px + 6 * ((100vw - 320px) / 680));
 }
 
 .btn-primary{
@@ -72,4 +69,67 @@ box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
 .container-fluid{
   display:flex;
   height:100vh;
+}
+
+@media only screen and (max-width: 650px) {
+
+  .sidebar {
+      animation: fadeOutLeft 1s;
+      opacity: 0;
+  }
+  .sidebar2 {
+      animation: fadeOutRight 1s;
+      opacity: 0;
+  }
+  .container{
+      width: 100%;
+  }
+}
+
+@-webkit-keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@-webkit-keyframes fadeOutRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
 }

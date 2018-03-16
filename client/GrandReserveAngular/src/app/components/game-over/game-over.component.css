@@ -2,7 +2,10 @@
     margin-left: auto;
     margin-right:auto;
     text-align: center;
+    animation: blink-animation 1.5s steps(5, start) infinite;
+   -webkit-animation: blink-animation 1.5s steps(5, start) infinite;
 }
+
 .form-container{
     margin-top: 3em;
     width: 50%;
@@ -38,7 +41,6 @@ box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
     text-align: center;
     animation: 
     typing 3.5s steps(30, end),
-    blink-caret .75s step-end infinite,
     dis 1s step-end ,
     wraps 3s step-end;
     
@@ -52,7 +54,6 @@ box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
     text-align: center;
     animation: 
     typing 3.5s steps(30, end),
-    blink-caret .75s step-end infinite,
     dis 1s step-end ,
     wraps 3s step-end;   
 }
@@ -95,10 +96,15 @@ box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
     to { width: 100% }
   }
   
-  /* The typewriter cursor effect */
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: black; }
+  @keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+  @-webkit-keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
   }
 
   @keyframes dis {
