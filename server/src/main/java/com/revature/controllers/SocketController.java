@@ -13,7 +13,7 @@ import com.revature.services.GameServiceInterface;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
-public class SocketController {
+public class SocketController implements SocketControllerInterface{
 		
 		//delete?
 		private final SimpMessagingTemplate template;

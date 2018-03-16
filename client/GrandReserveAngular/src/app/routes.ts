@@ -7,6 +7,7 @@ import { GameOverComponent } from './components/game-over/game-over.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { InstructorLoginComponent } from './components/instructor-login/instructor-login.component';
 import {OnTeamGuard} from './guards/onTeamGuard/on-team.guard';
+import {WaitingLobbyComponent} from "./components/waiting-lobby/waiting-lobby.component";
 
 
 export const appRoutes: Routes = [
@@ -40,6 +41,10 @@ export const appRoutes: Routes = [
   {
     path: 'instructor-login',
     component: InstructorLoginComponent
+  },
+  {
+    path: 'waiting-lobby',
+    component: WaitingLobbyComponent
   },
   {
     path: '**',
