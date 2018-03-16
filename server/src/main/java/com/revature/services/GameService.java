@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.controllers.SocketControllerInterface;
 import com.revature.entities.Game;
 import com.revature.entities.Player;
 import com.revature.entities.Team;
@@ -24,6 +25,8 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 	private static List<Game> gm = new ArrayList<>();
 	@Autowired
 	InstructorServiceInterface is;
+	@Autowired
+	SocketControllerInterface sci;
 	private ApplicationContext ac;
 	
 	private Game parseBody(String requestBody) {
@@ -102,11 +105,23 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 				flag = true;
 				if ( team == 0) {
 					g.getMap().get(cell).setColor("red");
+					t.getScoreTumbler().clear();
+					sci.toMapTeam0();
 				} else {
 					g.getMap().get(cell).setColor("blue");
+					t.getScoreTumbler().clear();
+					sci.toMapTeam1();
 				}
 			}
-			t.getScoreTumbler().clear();
+			else {
+				t.getScoreTumbler().clear();
+				if(team == 0) {
+					sci.toMapTeam0();
+				}
+				else {
+					sci.toMapTeam1();
+				}
+			}
 		}
 		return flag;		
 	}
