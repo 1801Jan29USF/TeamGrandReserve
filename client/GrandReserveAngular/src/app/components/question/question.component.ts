@@ -15,7 +15,7 @@ import {CookieService} from "angular2-cookie/core";
   styleUrls: ['./question.component.css']
 })
 
-export class QuestionComponent implements OnInit, OnDestroy {
+export class QuestionComponent implements OnInit{
   code: string;
   user: string;
   team: number;
@@ -32,6 +32,14 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.user = this.cookie.get('user').replace(/"/g, '');
     this.team = Number(this.cookie.get('team'));
     this.cell = Number(this.cookie.get('cell'));
+
+    if(this.team === 0){
+      this.ws.initializeWebSocketConnection('waiting-red')
+    }
+    else if(this.team === 1){
+      this.ws.initializeWebSocketConnection('waiting-blue')
+    }
+
     this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
       (succ: Game) => {
         this.questionSet = succ.map[this.cell].questionSet;
@@ -44,10 +52,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    this.ws.endConnection();
-  }
-
   submitAnswer() {
     console.log(this.question.correct);
     console.log(this.selected);
@@ -57,7 +61,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       alert('INCORRECT');
     }
     if (this.questionSet.length === 5) {
-      this.router.navigateByUrl('/menu');
+      this.router.navigateByUrl('/waiting-lobby');
     }
     this.getRandomQuestion();
     this.selected = -1;
