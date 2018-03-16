@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <h2>You scored {{points}} points this round!</h2>
+  <h3>Please wait for everyone else on your team to finish.</h3>
+  <h5>While you wait, here's how everyone else on your team is doing!</h5>
+  <table>
+    <thead>
+    <tr>
+      <td>Name</td>
+      <td>Points</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let player of players">
+      <td>player.name</td>
+      <td>player.points</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

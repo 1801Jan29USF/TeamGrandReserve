@@ -13,6 +13,7 @@ import { Player } from '../beans/player';
 export class WebsocketService {
 
   public static teams: Array<Subject<Player>> = new Array(2);
+  public static stomp;
   private subscription: any = new Subject;
   public leaderSubject: any = new Subject;
   private wsConf: any = {
@@ -31,12 +32,17 @@ export class WebsocketService {
         case ('question'):
           this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
           this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
-          this.stomp.subscribe(`/stomp/map`, this.routeToMap);
           break;
         case ('player'):
           this.stomp.subscribe(`/stomp/player`, this.getTeams);
           this.stomp.subscribe(`/stomp/leader`, this.getLeader);
           this.stomp.subscribe(`/stomp/map`, this.routeToMap);
+          break;
+        case ('waiting-red'):
+          this.stomp.subscribe(`/stomp/waiting-red`, this.routeToMap);
+          break;
+        case ('waiting-blue'):
+          this.stomp.subscribe(`/stomp/waiting-blue`, this.routeToMap);
           break;
       }
     });
