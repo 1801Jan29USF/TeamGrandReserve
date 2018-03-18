@@ -68,6 +68,11 @@ export class QuestionComponent implements OnInit {
             this.router.navigateByUrl('/waiting-lobby');
           } else {
             // I can do an app/send here if necessary
+            if (this.team == 0) {
+              this.ws.sendToMenuRed(this.code);
+            } else {
+              this.ws.sendToMenuBlue(this.code);
+            }
             this.router.navigateByUrl('/menu');
           }
         },

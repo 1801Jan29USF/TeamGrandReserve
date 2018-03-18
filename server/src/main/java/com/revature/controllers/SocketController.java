@@ -33,10 +33,17 @@ public class SocketController implements SocketControllerInterface{
 			return message;
 		}
 		
-		@MessageMapping("/send/question")
-		@SendTo("/stomp/question")
-		public String toQuestion(String message) {
-			System.out.println("in question");
+		@MessageMapping("/send/question-red")
+		@SendTo("/stomp/question-red")
+		public String toQuestionRed(String message) {
+			System.out.println("in question red");
+			return message;
+		}
+		
+		@MessageMapping("/send/question-blue")
+		@SendTo("/stomp/question-blue")
+		public String toQuestionBlue(String message) {
+			System.out.println("in question red");
 			return message;
 		}
 		
