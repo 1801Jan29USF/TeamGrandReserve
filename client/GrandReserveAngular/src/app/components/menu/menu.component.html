@@ -10,9 +10,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let team of game.teams">
-            <td>{{team.teamLeader}}</td>
-            <td>{{team.points}}</td>
+          <tr *ngFor="let player of game.teams[0]?.players">
+            <td>{{player.name}}</td>
+            <td>{{player.points}}</td>
+          </tr>
+          <tr></tr>
+          <tr *ngFor="let player of game.teams[1]?.players">
+            <td>{{player.name}}</td>
+            <td>{{player.points}}</td>
           </tr>
         </tbody>
       </table>

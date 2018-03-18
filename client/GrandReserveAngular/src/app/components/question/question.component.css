@@ -6,22 +6,22 @@ input{
 }
 label{
   vertical-align: middle;
-  font-size: 2vw;
+  font-size: calc(18px + 6 * ((100vw - 320px) / 680));
 }
-h1{
-  font-size: 25pt;
+h2{
+  font-size: calc(22px + 6 * ((100vw - 320px) / 680));
   word-wrap: break-word;
   margin: auto;
   padding: 20px;
 
 }
-h2{
-  font-size: 15pt;
+h3{
+  font-size: calc(18px + 6 * ((100vw - 320px) / 680));
   word-wrap: break-word;
 }
 .container-fluid{
   vertical-align: middle;
-  height: 100vh;
+  padding: .9em;
   margin: auto;
   display: grid;
   align-content: center;
@@ -35,3 +35,21 @@ table{
 tr{
   padding: 20vh;
 }
+
+.form-signin{
+  width: 85%;
+  border-radius: 5px;
+  padding: .5em;
+  -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+}
+.btn{
+  -webkit-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+  box-shadow: 3px 1px 14px 0px rgba(0,0,0,0.75);
+}
+.start-buttons{
+  padding-top: .5em;
+}
+

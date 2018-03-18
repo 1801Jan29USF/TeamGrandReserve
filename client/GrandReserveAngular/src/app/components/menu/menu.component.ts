@@ -78,6 +78,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
     if (this.isPlayer) {
       MenuComponent.team = this.cookie.get('team').replace(/"/g, '');
+
     }
     MenuComponent.wes = this.ws;
     if (MenuComponent.team == 0) {
