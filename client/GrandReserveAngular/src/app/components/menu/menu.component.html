@@ -1,44 +1,48 @@
 <div class="container-fluid">
   <aside class="sidebar">
     <h1>Game leader board</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Team</th>
-          <th scope="col">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let team of game.teams">
-          <td>{{team.teamLeader}}</td>
-          <td>{{team.points}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Team</th>
+            <th scope="col">Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let team of game.teams">
+            <td>{{team.teamLeader}}</td>
+            <td>{{team.points}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </aside>
   <aside class="sidebar2">
     <h1>Team leader board</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Username</th>
-          <th scope="col">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngIf="team == '0' else a">
-        <tr  *ngFor="let player of game.teams[0]?.players">
-          <td>{{player.name}}</td>
-          <td>{{player.points}}</td>
-        </tr>
-        </ng-container>
-        <ng-template #a>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="team == '0' else a">
+            <tr *ngFor="let player of game.teams[0]?.players">
+              <td>{{player.name}}</td>
+              <td>{{player.points}}</td>
+            </tr>
+          </ng-container>
+          <ng-template #a>
             <tr *ngFor="let player of game.teams[1]?.players">
-            <td>{{player.name}}</td>
-            <td>{{player.points}}</td>
+              <td>{{player.name}}</td>
+              <td>{{player.points}}</td>
           </ng-template>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
     <button class="btn btn btn-warning" *ngIf="!isPlayer" (click)="endGame()">End Game</button>
   </aside>
   <div class="container">

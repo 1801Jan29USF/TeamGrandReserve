@@ -64,7 +64,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.log('MENU COOKIE' + this.cookie.get('user'));
     this.code = this.cookie.get('game-code').replace(/"/g, '');
-    this.team = this.cookie.get('team').replace(/"/g, '');
     console.log(this.team);
     this.decoded.forEach(() => {
       if (this.cookie.get('user')) {
@@ -73,6 +72,9 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.isPlayer = false;
       }
     });
+    if(this.isPlayer){
+      this.team = this.cookie.get('team').replace(/"/g, '');
+    }
     MenuComponent.wes = this.ws;
     MenuComponent.wes.initializeWebSocketConnection('question');
     console.log(document.cookie);
