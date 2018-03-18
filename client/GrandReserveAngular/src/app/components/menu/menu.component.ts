@@ -41,7 +41,11 @@ export class NgbdModalContentComponent {
   constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
   sendQuestionToAll() {
-    MenuComponent.wes.sendQuestion(this.answeringTeam);
+    if (MenuComponent.team == 0) {
+      MenuComponent.wes.sendToQuestionRed(MenuComponent.code);
+    } else if (MenuComponent.team == 1) {
+      MenuComponent.wes.sendToQuestionBlue(MenuComponent.code);
+    }
   }
 }
 
@@ -53,18 +57,18 @@ export class NgbdModalContentComponent {
 
 export class MenuComponent implements OnInit, OnDestroy {
   static wes: WebsocketService;
+  static code;
+  static team;
   player;
   game: Game = new Game;
-  code;
   decoded = decodeURIComponent(document.cookie).split('; ');
   isPlayer;
-  team;
   constructor(private modalService: NgbModal, private client: HttpClient, public ws: WebsocketService, private cookie: CookieService) { }
 
   ngOnInit() {
     console.log('MENU COOKIE' + this.cookie.get('user'));
-    this.code = this.cookie.get('game-code').replace(/"/g, '');
-    console.log(this.team);
+    MenuComponent.code = this.cookie.get('game-code').replace(/"/g, '');
+    console.log(MenuComponent.team);
     this.decoded.forEach(() => {
       if (this.cookie.get('user')) {
         this.isPlayer = true;
@@ -72,11 +76,17 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.isPlayer = false;
       }
     });
-    if(this.isPlayer){
-      this.team = this.cookie.get('team').replace(/"/g, '');
+    if (this.isPlayer) {
+      MenuComponent.team = this.cookie.get('team').replace(/"/g, '');
     }
     MenuComponent.wes = this.ws;
-    MenuComponent.wes.initializeWebSocketConnection('question');
+    if (MenuComponent.team == 0) {
+      MenuComponent.wes.initializeWebSocketConnection('question-red');
+    } else if (MenuComponent.team == 1) {
+      MenuComponent.wes.initializeWebSocketConnection('question-blue');
+    } else {
+      MenuComponent.wes.initializeWebSocketConnection('question-instructor');
+    }
     console.log(document.cookie);
     this.startGame();
     console.log(this.isPlayer);
@@ -87,7 +97,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   startGame() {
-    this.client.get(`${environment.context}game/get/`.concat(this.code)).subscribe(
+    this.client.get(`${environment.context}game/get/`.concat(MenuComponent.code)).subscribe(
       (succ: Game) => {
         this.game = succ;
       },
@@ -98,7 +108,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   endGame() {
-    this.ws.sendToEnd(this.code);
+    MenuComponent.wes.sendToEnd(MenuComponent.code);
   }
 
 
@@ -107,7 +117,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.difficulty = this.game.map[i].difficulty;
     modalRef.componentInstance.subject = this.game.map[i].subject;
     modalRef.componentInstance.cellId = i;
-    modalRef.componentInstance.answeringTeam = this.team;
+    modalRef.componentInstance.answeringTeam = MenuComponent.team;
   }
 
   addClass(i) {
