@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Game } from '../../beans/game';
 import { environment } from '../../../environments/environment';
@@ -6,8 +6,37 @@ import { HttpClient } from '@angular/common/http';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Router } from '@angular/router';
 import { Question } from '../../beans/question';
-import {CookieService} from 'angular2-cookie/core';
+import { CookieService } from 'angular2-cookie/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+@Component({
+  selector: 'app-ngbd-modal-correct',
+  template: `
+  <div class="modal-header">
+  <h4 class="modal-title">You chose {{selected}} which is:</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>{{answer}}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">
+    Close
+  </button>
+
+</div>
+  `
+})
+
+export class NgbdModalCorrectComponent {
+  @Input() selected;
+  @Input() answer;
+  constructor(public activeModal: NgbActiveModal) { }
+
+
+}
 
 @Component({
   selector: 'app-question',
@@ -25,7 +54,7 @@ export class QuestionComponent implements OnInit {
   correct: number;
   selected: number;
 
-  constructor(private ws: WebsocketService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
+  constructor(private modalService: NgbModal, private ws: WebsocketService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
 
   ngOnInit() {
     this.correct = 0;
@@ -36,7 +65,7 @@ export class QuestionComponent implements OnInit {
 
     if (this.team === 0) {
       this.ws.initializeWebSocketConnection('waiting-red');
-    }else if (this.team === 1) {
+    } else if (this.team === 1) {
       this.ws.initializeWebSocketConnection('waiting-blue');
     }
 
@@ -57,9 +86,9 @@ export class QuestionComponent implements OnInit {
     console.log(parseInt(this.cookie.get('cell'), 10));
     if (this.selected == this.question.correct) {
       this.correct += 1;
-      alert('CORRECT');
+      this.open('Correct');
     } else {
-      alert('INCORRECT');
+      this.open('Incorrect');
     }
     if (this.questionSet.length === 5) {
       this.client.get(`${environment.context}game/update-cell/${this.code}/${this.team}/${this.user}/${this.cell}/${this.correct}`).subscribe(
@@ -84,5 +113,11 @@ export class QuestionComponent implements OnInit {
     const randIndex = Math.floor((Math.random() * this.questionSet.length));
     this.question = this.questionSet[randIndex];
     this.questionSet.splice(randIndex, 1);
+  }
+
+  open(message) {
+    const modalRef = this.modalService.open(NgbdModalCorrectComponent);
+    modalRef.componentInstance.selected = this.selected;
+    modalRef.componentInstance.answer = message;
   }
 }

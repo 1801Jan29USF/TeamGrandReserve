@@ -1,8 +1,9 @@
 <div class="container-fluid" align="center">
-  <h2>
-    {{question?.text}}
-  </h2>
+
   <form class="form-signin" id="submitTicket" (ngSubmit)="submitAnswer()">
+    <h2>
+      {{question?.text}}
+    </h2>
     <table class="table-bordered">
       <tr>
         <td>
@@ -45,6 +46,8 @@
         </td>
       </tr>
     </table>
-    <button class="btn btn-lg btn-primary " type="submit">Submit</button>
+    <div class="container start-buttons">
+      <button class="btn btn-lg btn-outline-primary " type="submit">Submit</button>
+    </div>
   </form>
 </div>
