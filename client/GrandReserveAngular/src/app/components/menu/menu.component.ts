@@ -96,7 +96,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   endGame() {
-    this.ws.sendToEnd(this.code);
+    MenuComponent.wes.sendToEnd(this.code);
   }
 
 
