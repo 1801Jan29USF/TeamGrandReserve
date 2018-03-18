@@ -62,12 +62,14 @@ public class SocketController implements SocketControllerInterface{
 			return gs.setLeader(player);
 		}
 		
+		@MessageMapping("/send/waiting-red")
 		@SendTo("/stomp/waiting-red")
 		public int toMapTeam0() {
 			System.out.println("in red");
 			return 0;
 		}
 		
+		@MessageMapping("/send/waiting-blue")
 		@SendTo("/stomp/waiting-blue")
 		public int toMapTeam1() {
 			System.out.println("in blue");

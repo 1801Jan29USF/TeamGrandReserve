@@ -25,8 +25,10 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 	private static List<Game> gm = new ArrayList<>();
 	@Autowired
 	InstructorServiceInterface is;
+	
 	@Autowired
 	SocketControllerInterface sci;
+	
 	private ApplicationContext ac;
 	
 	private Game parseBody(String requestBody) {
@@ -97,12 +99,13 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 		//check team score if last member
 		boolean flag = false;
 		if (t.getScoreTumbler().size() == t.getPlayers().size()) {
+			flag = true;
+			System.out.println("in if");
 			int acc = 0;
 			for (int num : t.getScoreTumbler()) {
 				acc += num;
 			}
 			if ( acc > t.getPlayers().size() * 5 / .7) {
-				flag = true;
 				if ( team == 0) {
 					g.getMap().get(cell).setColor("red");
 					t.getScoreTumbler().clear();
@@ -114,6 +117,7 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 				}
 			}
 			else {
+				System.out.println("in else");
 				t.getScoreTumbler().clear();
 				if(team == 0) {
 					sci.toMapTeam0();
