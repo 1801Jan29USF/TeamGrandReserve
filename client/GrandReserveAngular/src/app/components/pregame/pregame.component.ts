@@ -11,7 +11,7 @@ import { WebsocketService } from '../../services/websocket.service';
 import { AsyncPipe } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import {CookieService} from "angular2-cookie/core";
+import {CookieService} from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-pregame',
