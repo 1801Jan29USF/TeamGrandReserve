@@ -26,10 +26,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let player of game.teams[0]?.players">
+        <ng-container *ngIf="team == '0' else a">
+        <tr  *ngFor="let player of game.teams[0]?.players">
           <td>{{player.name}}</td>
           <td>{{player.points}}</td>
         </tr>
+        </ng-container>
+        <ng-template #a>
+            <tr *ngFor="let player of game.teams[1]?.players">
+            <td>{{player.name}}</td>
+            <td>{{player.points}}</td>
+          </ng-template>
       </tbody>
     </table>
     <button class="btn btn btn-warning" *ngIf="!isPlayer" (click)="endGame()">End Game</button>

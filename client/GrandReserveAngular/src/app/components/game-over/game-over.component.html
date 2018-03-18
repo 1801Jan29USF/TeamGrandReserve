@@ -1,56 +1,52 @@
 <div class="container-fluid">
-<header class="container">
-  <h1 class="game">Game</h1>
-  <br>
-  <h1 class="over">Over</h1>
-</header>
-<div class="container form-container">
+  <header class="container">
+    <h1 class="game">Game</h1>
+    <br>
+    <h1 class="over">Over</h1>
+  </header>
+  <div class="container form-container">
 
-  <form>
-    <div class="form-row">
-      <h2 class="form-header">Team name wins!</h2>
-    </div>
-    <div class="form-row">
-      <div class="col">
-        <table class="table red">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Red Team</th>
-              <th scope="col">Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>1000</td>
-            </tr>
-          </tbody>
-        </table>
+    <form>
+      <div class="form-row">
+        <h2 class="form-header">Team name wins!</h2>
       </div>
-      <div class="col">
-        <table class="table blue">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Blue team</th>
-              <th scope="col">Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>1000</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="form-row">
+        <div class="col">
+          <table class="table red">
+            <thead>
+              <tr>
+                <th scope="col">Red Team</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let player of game.teams[0]?.players">
+                <td>{{player.name}}</td>
+                <td>{{player.points}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <table class="table blue">
+            <thead>
+              <tr>
+                <th scope="col">Blue team</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let player of game.teams[1]?.players">
+                <td>{{player.name}}</td>
+                <td>{{player.points}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+    </form>
+    <div class="container buttons">
+      <button type="button" class="btn btn-outline-primary" routerLink="/start-screen">Play Again</button>
     </div>
-  </form>
-  <div class="container buttons">
-    <button type="button" class="btn btn-outline-primary" routerLink="/start-screen">Play Again</button>
   </div>
-</div>
 </div>
