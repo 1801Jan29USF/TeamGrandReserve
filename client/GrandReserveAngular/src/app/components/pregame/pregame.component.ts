@@ -99,7 +99,7 @@ export class PregameComponent implements OnInit, OnDestroy {
 
   }
   startGame() {
-    this.ws.sendToMap();
+    this.ws.sendToMap(this.code);
   }
 
 }

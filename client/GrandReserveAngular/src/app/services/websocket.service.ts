@@ -68,12 +68,12 @@ export class WebsocketService {
     this.stomp.send('/app/send/question', { 'code': code });
   }
 
-  sendToMap() {
-    this.stomp.send('/app/send/map', {});
+  sendToMap(code) {
+    this.stomp.send('/app/send/map', { 'code': code });
   }
 
-  sendToEnd() {
-    this.stomp.send('/app/send/end', {});
+  sendToEnd(code) {
+    this.stomp.send('/app/send/end', { 'code': code });
   }
 
   public getLeader = (data) => {

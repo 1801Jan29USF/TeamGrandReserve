@@ -41,7 +41,7 @@ export class NgbdModalContentComponent {
   constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
   sendQuestionToAll() {
-    MenuComponent.ws.sendQuestion(this.answeringTeam);
+    MenuComponent.wes.sendQuestion(this.answeringTeam);
   }
 }
 
@@ -52,7 +52,7 @@ export class NgbdModalContentComponent {
 })
 
 export class MenuComponent implements OnInit, OnDestroy {
-  static ws: WebsocketService;
+  static wes: WebsocketService;
   player;
   game: Game = new Game;
   code;
@@ -73,16 +73,15 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.isPlayer = false;
       }
     });
-    MenuComponent.ws = this.ws;
-
-    MenuComponent.ws.initializeWebSocketConnection('question');
+    MenuComponent.wes = this.ws;
+    MenuComponent.wes.initializeWebSocketConnection('question');
     console.log(document.cookie);
     this.startGame();
     console.log(this.isPlayer);
   }
 
   ngOnDestroy() {
-    this.ws.endConnection();
+    MenuComponent.wes.endConnection();
   }
 
   startGame() {
@@ -97,7 +96,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   endGame() {
-    this.ws.sendToEnd();
+    this.ws.sendToEnd(this.code);
   }
 
 
