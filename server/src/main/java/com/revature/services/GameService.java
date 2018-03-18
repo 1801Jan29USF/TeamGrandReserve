@@ -109,22 +109,22 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 				if ( team == 0) {
 					g.getMap().get(cell).setColor("red");
 					t.getScoreTumbler().clear();
-					sci.toMapTeam0();
+//					sci.toMapTeam0();
 				} else {
 					g.getMap().get(cell).setColor("blue");
 					t.getScoreTumbler().clear();
-					sci.toMapTeam1();
+//					sci.toMapTeam1();
 				}
 			}
 			else {
 				System.out.println("in else");
 				t.getScoreTumbler().clear();
-				if(team == 0) {
-					sci.toMapTeam0();
-				}
-				else {
-					sci.toMapTeam1();
-				}
+//				if(team == 0) {
+//					sci.toMapTeam0();
+//				}
+//				else {
+//					sci.toMapTeam1();
+//				}
 			}
 		}
 		return flag;		

@@ -29,8 +29,15 @@ export class WebsocketService {
     this.stomp.startConnect().then(() => {
       console.log('connected');
       switch (channel) {
-        case ('question'):
-          this.stomp.subscribe(`/stomp/question`, this.routeToQuestion);
+        case ('question-instructor'):
+        this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
+        break;
+        case ('question-red'):
+          this.stomp.subscribe(`/stomp/question-red`, this.routeToQuestion);
+          this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
+          break;
+        case ('question-blue'):
+          this.stomp.subscribe(`/stomp/question-blue`, this.routeToQuestion);
           this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
           break;
         case ('player'):
@@ -64,12 +71,24 @@ export class WebsocketService {
     this.stomp.send('/app/send/leader', player);
   }
 
-  sendQuestion(code) {
-    this.stomp.send('/app/send/question', { 'code': code });
-  }
-
   sendToMap(code) {
     this.stomp.send('/app/send/map', { 'code': code });
+  }
+
+  sendToMenuRed(code) {
+    this.stomp.send('/app/send/waiting-red', { 'code': code });
+  }
+
+  sendToMenuBlue(code) {
+    this.stomp.send('/app/send/waiting-blue', { 'code': code });
+  }
+
+  sendToQuestionRed(code) {
+    this.stomp.send('/app/send/question-red', { 'code': code });
+  }
+
+  sendToQuestionBlue(code) {
+    this.stomp.send('/app/send/question-blue', { 'code': code });
   }
 
   sendToEnd(code) {
