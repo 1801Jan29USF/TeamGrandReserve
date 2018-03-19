@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import {CookieService} from 'angular2-cookie/core';
+import {CookieService, CookieOptions} from 'angular2-cookie/core';
 
 import { appRoutes } from './routes';
 
@@ -51,6 +51,7 @@ import { WaitingLobbyComponent } from './components/waiting-lobby/waiting-lobby.
     WaitingLobbyComponent
   ],
   providers: [
+    { provide: CookieOptions, useValue: {} },
     WebsocketService,
     StompService,
     CookieService,

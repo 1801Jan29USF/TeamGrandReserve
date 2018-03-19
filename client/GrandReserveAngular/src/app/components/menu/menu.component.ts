@@ -41,9 +41,9 @@ export class NgbdModalContentComponent {
   constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
   sendQuestionToAll() {
-    if (this.answeringTeam == 0) {
+    if (this.answeringTeam.team == 0) {
       MenuComponent.wes.sendToQuestionRed(MenuComponent.code);
-    } else if (this.answeringTeam == 1) {
+    } else if (this.answeringTeam.team == 1) {
       MenuComponent.wes.sendToQuestionBlue(MenuComponent.code);
     }
   }
@@ -59,6 +59,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   static wes: WebsocketService;
   static code;
   team;
+  team1;
   player;
   game: Game = new Game;
   decoded = decodeURIComponent(document.cookie).split('; ');
@@ -87,7 +88,6 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
     if (this.isPlayer) {
       this.team = this.cookie.get('team').replace(/"/g, '');
-
     }
     MenuComponent.wes = this.ws;
     if (this.team == 0) {
@@ -136,7 +136,6 @@ export class MenuComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.cellId = i;
     modalRef.componentInstance.answeringTeam = this.team;
   }
-
   addClass() {
     for (let index = 0; index < this.game.map.length; index++) {
       if (this.game.map[index].color === 'red') {
