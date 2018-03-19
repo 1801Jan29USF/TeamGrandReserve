@@ -27,7 +27,6 @@ export const appRoutes: Routes = [
   {
     path: 'question',
     component: QuestionComponent,
-    canActivate: [OnTeamGuard]
   },
   {
 

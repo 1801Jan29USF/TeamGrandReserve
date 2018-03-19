@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Team } from '../beans/team';
 import { Subject } from 'rxjs/Subject';
 import { Player } from '../beans/player';
+import {CookieService} from "angular2-cookie/core";
 
 
 @Injectable()
@@ -17,9 +18,9 @@ export class WebsocketService {
   private subscription: any = new Subject;
   public leaderSubject: any = new Subject;
   private wsConf: any = {
-    host: 'http://ec2-18-216-134-35.us-east-2.compute.amazonaws.com:8090/dist/instructor-login/server/socket'
+    host: 'http://localhost:8080/server/socket'
   };
-  constructor(public stomp: StompService, private router: Router) {
+  constructor(public stomp: StompService, private router: Router, private cookie: CookieService) {
   }
 
   initializeWebSocketConnection(channel: string) {
@@ -31,6 +32,8 @@ export class WebsocketService {
       switch (channel) {
         case ('question-instructor'):
         this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
+          this.stomp.subscribe(`/stomp/waiting-red`, this.routeToMap);
+          this.stomp.subscribe(`/stomp/waiting-blue`, this.routeToMap);
         break;
         case ('question-red'):
           this.stomp.subscribe(`/stomp/question-red`, this.routeToQuestion);
@@ -111,6 +114,7 @@ export class WebsocketService {
 
   public routeToQuestion = (data) => {
     console.log(data);
+    this.cookie.put('cell', data.code);
     this.router.navigateByUrl('/question');
   }
 

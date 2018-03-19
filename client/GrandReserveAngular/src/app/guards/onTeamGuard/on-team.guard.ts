@@ -12,7 +12,9 @@ export class OnTeamGuard implements CanActivate {
     let answeringTeam: any = 'a';
     const cookie = new CookieService;
     myTeam = cookie.getObject('team');
+    console.log(myTeam);
     answeringTeam = cookie.getObject('answering-team');
+    console.log(answeringTeam);
     return myTeam == answeringTeam;
   }
 }

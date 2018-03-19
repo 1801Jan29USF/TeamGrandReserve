@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="game">You scored {{points}} points this round!</h2>
+  <h2 class="game">You've scored {{points}} points so far!</h2>
   <h3>Please wait for everyone else on your team to finish.</h3>
   <h5>While you wait, here's how everyone else on your team is doing!</h5>
   <br>
@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-        <ng-container *ngIf="team == '0' else a">
+        <ng-container *ngIf="team == '0'; else a">
             <tr *ngFor="let player of game.teams[0]?.players">
               <td>{{player.name}}</td>
               <td>{{player.points}}</td>

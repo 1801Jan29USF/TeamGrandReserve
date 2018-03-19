@@ -24,7 +24,6 @@ import { CookieService } from 'angular2-cookie/core';
     <div class="modal-footer">
     <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click');
         sendQuestionToAll();
-        this.cookie.putObject('cell', cellId);
         this.cookie.putObject('answering-team', answeringTeam)">
       Begin
     </button>
@@ -42,9 +41,9 @@ export class NgbdModalContentComponent {
 
   sendQuestionToAll() {
     if (this.answeringTeam == 0) {
-      MenuComponent.wes.sendToQuestionRed(MenuComponent.code);
+      MenuComponent.wes.sendToQuestionRed(this.cellId);
     } else if (this.answeringTeam == 1) {
-      MenuComponent.wes.sendToQuestionBlue(MenuComponent.code);
+      MenuComponent.wes.sendToQuestionBlue(this.cellId);
     }
   }
 }
@@ -125,9 +124,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 
   open(i) {
-    if (this.game.map[i].color === 'red') {
+    if (this.game.map[i].color === 'red' || this.game.map[i].color === 'blue') {
       return;
-    } else if (this.game.map[i].color === 'blue') {
+    } else if (this.team.teamLeader !== this.player) {
       return;
     }
     const modalRef = this.modalService.open(NgbdModalContentComponent);
