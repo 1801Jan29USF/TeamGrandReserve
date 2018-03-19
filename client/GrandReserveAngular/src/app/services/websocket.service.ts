@@ -15,10 +15,10 @@ export class WebsocketService {
 
   public static teams: Array<Subject<Player>> = new Array(2);
   public static stomp;
-  private subscription: any = new Subject;
+  public subject: Subject<any> = new Subject;
   public leaderSubject: any = new Subject;
   private wsConf: any = {
-    host: 'http://localhost:8080/server/socket'
+    host: 'http://ec2-18-216-134-35.us-east-2.compute.amazonaws.com:8090/server/socket'
   };
   constructor(public stomp: StompService, private router: Router, private cookie: CookieService) {
   }
@@ -50,9 +50,11 @@ export class WebsocketService {
           break;
         case ('waiting-red'):
           this.stomp.subscribe(`/stomp/waiting-red`, this.routeToMap);
+          this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
           break;
         case ('waiting-blue'):
           this.stomp.subscribe(`/stomp/waiting-blue`, this.routeToMap);
+          this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
           break;
       }
     });
@@ -120,6 +122,7 @@ export class WebsocketService {
 
   public routeToMap = (data) => {
     console.log(data);
+    this.subject.next(data);
     this.router.navigateByUrl('/menu');
   }
 

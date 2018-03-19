@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy,} from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Game } from '../../beans/game';
 import { Instructor } from '../../beans/instructor';
@@ -40,9 +40,10 @@ export class NgbdModalContentComponent {
   constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
   sendQuestionToAll() {
-    if (this.answeringTeam == 0) {
+    console.log(this.cookie.get('user'));
+    if (this.answeringTeam == 0 && this.cookie.get('user') == `"${MenuComponent.redLeader}"`) {
       MenuComponent.wes.sendToQuestionRed(this.cellId);
-    } else if (this.answeringTeam == 1) {
+    } else if (this.answeringTeam == 1 && this.cookie.get('user') == `"${MenuComponent.blueLeader}"`) {
       MenuComponent.wes.sendToQuestionBlue(this.cellId);
     }
   }
@@ -57,6 +58,8 @@ export class NgbdModalContentComponent {
 export class MenuComponent implements OnInit, OnDestroy {
   static wes: WebsocketService;
   static code;
+  static redLeader;
+  static blueLeader;
   team;
   player;
   game: Game = new Game;
@@ -98,6 +101,9 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
     console.log(document.cookie);
     this.startGame();
+    this.ws.subject.subscribe((data) => {
+      this.startGame();
+    });
     console.log(this.isPlayer);
   }
 
@@ -110,6 +116,9 @@ export class MenuComponent implements OnInit, OnDestroy {
       (succ: Game) => {
         console.log(succ);
         this.game = succ;
+        console.log(this.game.teams[0].teamLeader);
+        MenuComponent.redLeader = this.game.teams[0].teamLeader;
+        MenuComponent.blueLeader = this.game.teams[1].teamLeader;
         this.addClass();
       },
       (err) => {
