@@ -12,7 +12,7 @@ import com.revature.services.InstructorServiceInterface;
 @Controller
 @RestController
 @RequestMapping("instructor")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class InstructorController extends EntityController{
 	
 	@Autowired

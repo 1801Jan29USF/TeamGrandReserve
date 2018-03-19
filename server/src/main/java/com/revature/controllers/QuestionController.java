@@ -12,7 +12,7 @@ import com.revature.services.QuestionServiceInterface;
 @Controller
 @RestController
 @RequestMapping("question")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class QuestionController extends EntityController{
 	
 	@Autowired

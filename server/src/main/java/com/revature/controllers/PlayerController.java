@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 @RestController
 @RequestMapping("player")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class PlayerController extends EntityController {
 	
 //	@Autowired
