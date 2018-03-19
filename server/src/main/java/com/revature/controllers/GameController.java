@@ -21,7 +21,7 @@ import com.revature.services.GameServiceInterface;
 @Controller
 @RestController
 @RequestMapping("game")
-@CrossOrigin(origins = "http://ec2-18-217-91-70.us-east-2.compute.amazonaws.com:8090")
+@CrossOrigin(origins = "http://localhost:8090/dist")
 public class GameController {
 	
 	@Autowired
