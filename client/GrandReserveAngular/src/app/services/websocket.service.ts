@@ -17,7 +17,7 @@ export class WebsocketService {
   private subscription: any = new Subject;
   public leaderSubject: any = new Subject;
   private wsConf: any = {
-    host: 'http://localhost:8080/server/socket'
+    host: 'http://ec2-18-216-134-35.us-east-2.compute.amazonaws.com:8090/dist/instructor-login/server/socket'
   };
   constructor(public stomp: StompService, private router: Router) {
   }
