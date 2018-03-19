@@ -31,22 +31,22 @@ export class GameOverComponent implements OnInit {
     );
   }
 
-  calculateWinner(){
-    for(let cell of this.game.map){
-      if(cell.color === 'red'){
+  calculateWinner() {
+    for (let cell of this.game.map) {
+      if (cell.color === 'red') {
         this.team0points++;
       }
-      else if(cell.color === 'blue'){
+      else if (cell.color === 'blue') {
         this.team1points++;
       }
     }
-    if(this.team0points > this.team1points){
+    if (this.team0points > this.team1points) {
       this.winner = 'Red team'
     }
-    else if(this.team1points > this.team0points){
+    else if (this.team1points > this.team0points) {
       this.winner = 'Blue team'
     }
-    else{
+    else {
       this.winner = 'No one'
     }
     console.log(this.team0points);

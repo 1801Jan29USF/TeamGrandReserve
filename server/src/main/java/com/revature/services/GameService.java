@@ -137,7 +137,7 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 			for(int j = 0; j < GameService.gm.get(0).getTeams().get(i).getPlayers().size(); j++) {
 				if( GameService.gm.get(0).getTeams().get(i).getPlayers().get(j).getName().equals(player.getName())) {
 					GameService.gm.get(0).getTeams().get(i).getPlayers().get(j).setCaptain(true);
-					GameService.gm.get(0).getTeams().get(i).setTeamLeader(j);
+					GameService.gm.get(0).getTeams().get(i).setTeamLeader(player.getName());
 					p = GameService.gm.get(0).getTeams().get(i).getPlayers().get(j);
 					p.setPoints(i);
 				} else {

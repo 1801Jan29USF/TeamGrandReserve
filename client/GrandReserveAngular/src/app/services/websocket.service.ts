@@ -50,9 +50,11 @@ export class WebsocketService {
           break;
         case ('waiting-red'):
           this.stomp.subscribe(`/stomp/waiting-red`, this.routeToMap);
+          this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
           break;
         case ('waiting-blue'):
           this.stomp.subscribe(`/stomp/waiting-blue`, this.routeToMap);
+          this.stomp.subscribe(`/stomp/end`, this.routeToEnd);
           break;
       }
     });

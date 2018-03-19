@@ -9,7 +9,7 @@ import java.util.Vector;
  */
 public class Team {
     private List<Player> players = new ArrayList<>();
-    private int teamLeader;
+    private String teamLeader;
     private int points;
     private int currentlySelected;
     private List<Integer> scoreTumbler = new Vector<>();
@@ -22,11 +22,11 @@ public class Team {
         this.players = players;
     }
 
-    public int getTeamLeader() {
+    public String getTeamLeader() {
         return teamLeader;
     }
 
-    public void setTeamLeader(int teamLeader) {
+    public void setTeamLeader(String teamLeader) {
         this.teamLeader = teamLeader;
     }
 
@@ -40,7 +40,7 @@ public class Team {
 
 	public Team() {
 		super();
-		this.teamLeader = 0;
+		this.teamLeader = null;
 		this.points = 0;
 	}
 
