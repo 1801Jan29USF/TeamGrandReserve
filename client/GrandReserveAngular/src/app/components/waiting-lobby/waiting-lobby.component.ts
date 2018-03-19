@@ -16,6 +16,7 @@ export class WaitingLobbyComponent implements OnInit, OnDestroy {
   game: Game = new Game;
   points;
   player;
+  team;
   constructor(private router: Router, private cookie: CookieService, private ws: WebsocketService, private client: HttpClient) { }
 
   ngOnInit() {
@@ -25,8 +26,8 @@ export class WaitingLobbyComponent implements OnInit, OnDestroy {
       (succ: Game) => {
         console.log(succ);
         this.game = succ;
-        const team = this.cookie.getObject('team');
-        if (team === '0') {
+        this.team = this.cookie.getObject('team');
+        if (this.team === '0') {
           console.log('hello');
 
           for (const player of this.game.teams[0].players) {
@@ -38,7 +39,7 @@ export class WaitingLobbyComponent implements OnInit, OnDestroy {
           }
           document.getElementsByTagName('thead')[0].classList.add('red');
           this.ws.initializeWebSocketConnection('waiting-red');
-        } else if (team === '1') {
+        } else if (this.team === '1') {
           for (const player of this.game.teams[1].players) {
             if (this.player === player.name) {
               this.points = player.points;
