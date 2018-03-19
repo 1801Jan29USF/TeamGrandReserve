@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-        <ng-container *ngIf="cookie.getObject('team') == '0' else a">
+        <ng-container *ngIf="team == '0' else a">
             <tr *ngFor="let player of game.teams[0]?.players">
               <td>{{player.name}}</td>
               <td>{{player.points}}</td>

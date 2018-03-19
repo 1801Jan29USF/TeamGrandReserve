@@ -41,9 +41,9 @@ export class NgbdModalContentComponent {
   constructor(public activeModal: NgbActiveModal, public cookie: CookieService) { }
 
   sendQuestionToAll() {
-    if (MenuComponent.team == 0) {
+    if (this.answeringTeam == 0) {
       MenuComponent.wes.sendToQuestionRed(MenuComponent.code);
-    } else if (MenuComponent.team == 1) {
+    } else if (this.answeringTeam == 1) {
       MenuComponent.wes.sendToQuestionBlue(MenuComponent.code);
     }
   }
@@ -58,7 +58,7 @@ export class NgbdModalContentComponent {
 export class MenuComponent implements OnInit, OnDestroy {
   static wes: WebsocketService;
   static code;
-  static team;
+  team;
   player;
   game: Game = new Game;
   decoded = decodeURIComponent(document.cookie).split('; ');
@@ -86,13 +86,13 @@ export class MenuComponent implements OnInit, OnDestroy {
       }
     });
     if (this.isPlayer) {
-      MenuComponent.team = this.cookie.get('team').replace(/"/g, '');
+      this.team = this.cookie.get('team').replace(/"/g, '');
 
     }
     MenuComponent.wes = this.ws;
-    if (MenuComponent.team == 0) {
+    if (this.team == 0) {
       MenuComponent.wes.initializeWebSocketConnection('question-red');
-    } else if (MenuComponent.team == 1) {
+    } else if (this.team == 1) {
       MenuComponent.wes.initializeWebSocketConnection('question-blue');
     } else {
       MenuComponent.wes.initializeWebSocketConnection('question-instructor');
@@ -134,7 +134,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.difficulty = this.game.map[i].difficulty;
     modalRef.componentInstance.subject = this.game.map[i].subject;
     modalRef.componentInstance.cellId = i;
-    modalRef.componentInstance.answeringTeam = MenuComponent.team;
+    modalRef.componentInstance.answeringTeam = this.team;
   }
 
   addClass() {
