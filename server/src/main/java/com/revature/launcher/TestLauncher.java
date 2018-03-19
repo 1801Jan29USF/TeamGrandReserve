@@ -6,7 +6,10 @@ import com.revature.dao.QuestionDaoClass;
 import com.revature.entities.dbobjects.Question;
 import com.revature.entities.dbobjects.Bank;
 import com.revature.util.SessionUtil;
+import com.revature.util.SessionUtilInterface;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Functionality:
@@ -14,7 +17,8 @@ import org.apache.log4j.Logger;
 public class TestLauncher {
     private static Logger log = Logger.getRootLogger();
     private static QuestionDao qdao = new QuestionDaoClass();
-    private static SessionUtil su = SessionUtil.getSessionUtil();
+    @Autowired
+    private SessionUtilInterface su;
 
     public static void main(String[] args) {
         //log.warn(qdao.getById(0));

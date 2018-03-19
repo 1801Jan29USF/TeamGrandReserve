@@ -5,10 +5,12 @@ import org.hibernate.NonUniqueObjectException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.entities.dbobjects.Instructor;
 import com.revature.util.SessionUtil;
+import com.revature.util.SessionUtilInterface;
 
 /**
  * Functionality:
@@ -16,7 +18,8 @@ import com.revature.util.SessionUtil;
 @Repository
 public class InstructorDaoClass implements InstructorDao {
     private Logger log = Logger.getRootLogger();
-    private SessionUtil su = SessionUtil.getSessionUtil();
+    @Autowired
+    private SessionUtilInterface su;
     @Override
     public Instructor save(Instructor i) {
         Session se = su.getSession();

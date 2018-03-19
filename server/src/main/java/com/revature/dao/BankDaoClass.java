@@ -1,8 +1,5 @@
 package com.revature.dao;
 
-import com.revature.entities.dbobjects.Bank;
-import com.revature.util.SessionUtil;
-
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,7 +8,11 @@ import org.hibernate.NonUniqueObjectException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.revature.entities.dbobjects.Bank;
+import com.revature.util.SessionUtilInterface;
 
 /**
  * Functionality:
@@ -19,7 +20,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BankDaoClass implements BankDao{
     private Logger log = Logger.getRootLogger();
-    private SessionUtil su = SessionUtil.getSessionUtil();
+    @Autowired
+    private SessionUtilInterface su;
     @Override
     public Bank save(Bank b) {
         Session se = su.getSession();
