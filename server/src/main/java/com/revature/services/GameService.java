@@ -61,6 +61,7 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 	public Game postCreate(String instructor) {
 		Game g = (Game) ac.getBean("game");
 		g.setInstructor(new Instructor(instructor, null));
+		gm.clear();
 		gm.add(g);
 		return g;
 	}
