@@ -12,7 +12,7 @@ import com.revature.services.GenericService;
 @Controller
 @RestController
 @RequestMapping("bank")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class BankController extends EntityController{
 	
 	@Autowired
