@@ -10,10 +10,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.entities.dbobjects.Question;
 import com.revature.util.SessionUtil;
+import com.revature.util.SessionUtilInterface;
 
 /**
  * Functionality:
@@ -21,7 +23,8 @@ import com.revature.util.SessionUtil;
 @Repository
 public class QuestionDaoClass implements QuestionDao{
     private Logger log = Logger.getRootLogger();
-    private SessionUtil su = SessionUtil.getSessionUtil();
+    @Autowired
+    private SessionUtilInterface su;
 
     public Question save(Question q){
         Session se = su.getSession();

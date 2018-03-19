@@ -5,12 +5,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.stereotype.Component;
 
 /**
  * Functionality:
  */
-public class SessionUtil {
-    private static SessionUtil su = new SessionUtil();
+@Component
+public class SessionUtil implements SessionUtilInterface{
     private SessionFactory sf;
     {
         Configuration conf = new Configuration().configure();
@@ -20,12 +21,8 @@ public class SessionUtil {
         sf = conf.buildSessionFactory(serviceRegistry);
     }
 
-    private SessionUtil() {
+    public SessionUtil() {
         super();
-    }
-
-    public static SessionUtil getSessionUtil() {
-        return su;
     }
 
     public Session getSession() {
