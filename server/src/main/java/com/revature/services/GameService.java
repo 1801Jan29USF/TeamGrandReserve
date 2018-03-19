@@ -105,7 +105,7 @@ public class GameService implements GameServiceInterface, ApplicationContextAwar
 			for (int num : t.getScoreTumbler()) {
 				acc += num;
 			}
-			if ( acc > t.getPlayers().size() * 5 / .7) {
+			if ( acc > t.getPlayers().size() * 5 * .7) {
 				if ( team == 0) {
 					g.getMap().get(cell).setColor("red");
 					t.getScoreTumbler().clear();

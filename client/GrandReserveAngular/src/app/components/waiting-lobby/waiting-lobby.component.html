@@ -1,19 +1,27 @@
-<div class="container-fluid">
-  <h2>You scored {{points}} points this round!</h2>
+<div class="container">
+  <h2 class="game">You scored {{points}} points this round!</h2>
   <h3>Please wait for everyone else on your team to finish.</h3>
   <h5>While you wait, here's how everyone else on your team is doing!</h5>
-  <table>
+  <br>
+  <table class="table">
     <thead>
     <tr>
-      <td>Name</td>
-      <td>Points</td>
+      <th scope="col">Name</th>
+      <th scope="col">Points</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let player of players">
-      <td>player.name</td>
-      <td>player.points</td>
-    </tr>
+        <ng-container *ngIf="cookie.getObject('team') == '0' else a">
+            <tr *ngFor="let player of game.teams[0]?.players">
+              <td>{{player.name}}</td>
+              <td>{{player.points}}</td>
+            </tr>
+          </ng-container>
+          <ng-template #a>
+            <tr *ngFor="let player of game.teams[1]?.players">
+              <td>{{player.name}}</td>
+              <td>{{player.points}}</td>
+          </ng-template>
     </tbody>
   </table>
 </div>
