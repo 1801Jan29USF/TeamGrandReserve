@@ -67,8 +67,17 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('MENU COOKIE' + this.cookie.get('user'));
+
     MenuComponent.code = this.cookie.get('game-code').replace(/"/g, '');
-    console.log(MenuComponent.team);
+
+    if (this.cookie.get('team') === '"0"') {
+      document.getElementsByClassName('sidebar2')[0].classList.add('red');
+    } else {
+      document.getElementsByClassName('sidebar2')[0].classList.add('blue');
+    }
+
+
+
     this.decoded.forEach(() => {
       if (this.cookie.get('user')) {
         this.isPlayer = true;
@@ -100,7 +109,9 @@ export class MenuComponent implements OnInit, OnDestroy {
   startGame() {
     this.client.get(`${environment.context}game/get/`.concat(MenuComponent.code)).subscribe(
       (succ: Game) => {
+        console.log(succ);
         this.game = succ;
+        this.addClass();
       },
       (err) => {
         console.log('failed');
@@ -114,6 +125,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 
   open(i) {
+    if (this.game.map[i].color === 'red') {
+      return;
+    } else if (this.game.map[i].color === 'blue') {
+      return;
+    }
     const modalRef = this.modalService.open(NgbdModalContentComponent);
     modalRef.componentInstance.difficulty = this.game.map[i].difficulty;
     modalRef.componentInstance.subject = this.game.map[i].subject;
@@ -121,15 +137,17 @@ export class MenuComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.answeringTeam = MenuComponent.team;
   }
 
-  addClass(i) {
-    console.log(this.cookie.get('team'));
-    if (this.cookie.get('team') == '"0"') {
-      document.getElementsByClassName('col')[i].classList.add('red');
-    } else if (this.cookie.get('team') == '"1"') {
-      document.getElementsByClassName('col')[i].classList.add('blue');
-    }
+  addClass() {
+    for (let index = 0; index < this.game.map.length; index++) {
+      if (this.game.map[index].color === 'red') {
+        document.getElementsByClassName('col')[index].classList.add('red');
+        document.getElementsByClassName('col')[index].classList.remove('white');
+      } else if (this.game.map[index].color === 'blue') {
+        document.getElementsByClassName('col')[index].classList.add('blue');
+        document.getElementsByClassName('col')[index].classList.remove('white');
+      }
 
-    document.getElementsByClassName('col')[i].classList.remove('white');
+    }
   }
 
 }

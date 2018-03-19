@@ -2,20 +2,20 @@
   <aside class="sidebar">
     <h1>Game leader board</h1>
     <div class="table-responsive">
-      <table class="table table-striped table-hover">
-        <thead>
+      <table class="table table-bordered table-hover team">
+        <thead >
           <tr>
             <th scope="col">Team</th>
             <th scope="col">Points</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let player of game.teams[0]?.players">
+          <tr style="background-color:red" *ngFor="let player of game.teams[0]?.players">
             <td>{{player.name}}</td>
             <td>{{player.points}}</td>
           </tr>
           <tr></tr>
-          <tr *ngFor="let player of game.teams[1]?.players">
+          <tr style="background-color:blue" *ngFor="let player of game.teams[1]?.players">
             <td>{{player.name}}</td>
             <td>{{player.points}}</td>
           </tr>
@@ -26,7 +26,7 @@
   <aside class="sidebar2">
     <h1>Team leader board</h1>
     <div class="table-responsive">
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col">Username</th>
@@ -54,35 +54,35 @@
     <div class="row">
       <div class="col red"></div>
       <div class="col red"></div>
-      <div class="col white" (click)="open(2); addClass(2)"></div>
-      <div class="col white" (click)="open(3); addClass(3)"></div>
-      <div class="col white" (click)="open(4); addClass(4)"></div>
+      <div class="col white" (click)="open(2); "></div>
+      <div class="col white" (click)="open(3); "></div>
+      <div class="col white" (click)="open(4); "></div>
     </div>
     <div class="row">
       <div class="col red"></div>
-      <div class="col white" (click)="open(6); addClass(6)"></div>
-      <div class="col white" (click)="open(7); addClass(7)"></div>
-      <div class="col white" (click)="open(8); addClass(8)"></div>
-      <div class="col white" (click)="open(9); addClass(9)"></div>
+      <div class="col white" (click)="open(6); "></div>
+      <div class="col white" (click)="open(7); "></div>
+      <div class="col white" (click)="open(8); "></div>
+      <div class="col white" (click)="open(9); "></div>
     </div>
     <div class="row">
-      <div class="col white" (click)="open(10); addClass(10)"></div>
-      <div class="col white" (click)="open(11); addClass(11)"></div>
-      <div class="col white" (click)="open(12); addClass(12)"></div>
-      <div class="col white" (click)="open(13); addClass(13)"></div>
-      <div class="col white" (click)="open(14); addClass(14)"></div>
+      <div class="col white" (click)="open(10); "></div>
+      <div class="col white" (click)="open(11); "></div>
+      <div class="col white" (click)="open(12); "></div>
+      <div class="col white" (click)="open(13); "></div>
+      <div class="col white" (click)="open(14); "></div>
     </div>
     <div class="row">
-      <div class="col white" (click)="open(15); addClass(15)"></div>
-      <div class="col white" (click)="open(16); addClass(16)"></div>
-      <div class="col white" (click)="open(17); addClass(17)"></div>
-      <div class="col white" (click)="open(18); addClass(18)"></div>
+      <div class="col white" (click)="open(15); "></div>
+      <div class="col white" (click)="open(16); "></div>
+      <div class="col white" (click)="open(17); "></div>
+      <div class="col white" (click)="open(18); "></div>
       <div class="col blue"></div>
     </div>
     <div class="row">
-      <div class="col white" (click)="open(20); addClass(20)"></div>
-      <div class="col white" (click)="open(21); addClass(21)"></div>
-      <div class="col white" (click)="open(22); addClass(22)"></div>
+      <div class="col white" (click)="open(20); "></div>
+      <div class="col white" (click)="open(21); "></div>
+      <div class="col white" (click)="open(22); "></div>
       <div class="col blue"></div>
       <div class="col blue"></div>
     </div>

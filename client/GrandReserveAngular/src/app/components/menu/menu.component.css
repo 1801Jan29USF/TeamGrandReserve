@@ -29,12 +29,25 @@ aside h1{
     margin-bottom: 6%;
     
 }
-
+.table{
+    text-align: left;
+    color:black;
+    background-color: aliceblue;
+    -webkit-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.75);
+}
+.team{
+    color:white;
+}
+.team thead{
+    color:black;
+}
 .sidebar{
     word-wrap:break-word;
     padding: .5em;
     text-align: center;
-    background-color:red;
+    background-color:whitesmoke;
     right:1.1%;
     position: relative;
     width: 26%;
@@ -49,7 +62,6 @@ aside h1{
     word-wrap:break-word;
     padding: .5em;
     text-align: center;
-    background-color:blue;
     float:right;
     left:1.1%;
     position: relative;
@@ -87,10 +99,7 @@ aside h1{
     margin-right: auto;
     text-align: center;
 }
- table{
-     text-align: left;
-     color:whitesmoke;
- }
+
 
  @-webkit-keyframes fadeOutLeft {
     from {
