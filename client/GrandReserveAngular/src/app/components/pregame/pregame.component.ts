@@ -62,7 +62,7 @@ export class PregameComponent implements OnInit, OnDestroy {
 
   setLeader(player: Player) {
     // TODO: this doesn't work when you get to game screen, need db calls here to keep changes
-    if (!player.captain) {
+    if (!player.captain && this.isPlayer === false) {
       if (this.redTeam.players.includes(player)) {
         this.redTeam.players.forEach(function (value) {
           if (value.captain) {

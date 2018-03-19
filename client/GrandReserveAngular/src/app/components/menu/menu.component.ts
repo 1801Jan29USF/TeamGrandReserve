@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy,} from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Game } from '../../beans/game';
 import { Instructor } from '../../beans/instructor';
@@ -101,6 +101,9 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
     console.log(document.cookie);
     this.startGame();
+    this.ws.subject.subscribe((data) => {
+      this.startGame();
+    });
     console.log(this.isPlayer);
   }
 
